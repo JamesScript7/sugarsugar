@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <title>Sugar Beta 1.0</title>
+  <link rel='stylesheet' type='text/css' href='style.css'>
+</head>
+
+<body>
+  <div id='container' class='wrapper'>
+    <div id='top-menu' class='top-menu'>
+      <a href='index.html'><h3>Sugar beta 1.0</h3></a>
+
+      <form class='menu home' action='http://sugar-sugar.surge.sh/login.html' >
+        <input class='button small' type='submit' value='Login'/>
+      </form>
+    </div>
+    <div id='drop-down' style='display: none'>
+      <div id='content'>
+        <h3><span id='name'></span></h3>
+        <span id='date'></span>
+        <br/>
+        <span id='stat'></span>
+        <br/>
+        <br/>
+        <input class='button delete' type='submit' value='DELETE'/>
+        <input class='button waiting' type='submit' value='WAITING'/>
+        <input class='button paid' type='submit' value='PAID'/>
+      </div>
+    </div>
+    <div id='list' class='list'></div>
+
+  </div>
+  <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+  <script>
+    var config = {
+      apiKey: "AIzaSyDDwFPb9C0ia6t0IHMZYD9q3JI-t3QjaFY",
+      authDomain: "billegoat-b1829.firebaseapp.com",
+      databaseURL: "https://billegoat-b1829.firebaseio.com",
+      projectId: "billegoat-b1829",
+      storageBucket: "",
+      messagingSenderId: "250475015107"
+    };
+    firebase.initializeApp(config);
+  </script>
+  <script type='text/javascript' src='ma1n.js'></script>
+</body>
+</html>

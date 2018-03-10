@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <title>Sugar beta 1.0</title>
+  <link rel='stylesheet' type='text/css' href='style.css'>
+</head>
+
+<body>
+  <div id='container' class='wrapper'>
+    <div id='top-menu' class='top-menu'>
+      <a href='/index.html'><h3>Sugar beta 1.0</h3></a>
+    </div>
+
+    <div>
+      <div class='new-form'>
+        <form id='form-itself' action='index.html'>
+          <br>
+          <div class='name-box'>
+            <label for='name'>Name: </label>
+            <br>
+            <input id='name' type='text' name='name' required />
+          </div>
+          <br>
+          <div class='amount-box'>
+            <label for='amount'>Amount: </label>
+            <br>
+            <input id='amount' type='number' name='amount' placeholder="$0.00" required />
+          </div>
+          <br>
+          <div class='reason-box'>
+            <label for='reason'>For: </label>
+            <br>
+            <textarea id='reason' type='text' name='reason'></textarea>
+          </div>
+          <div id='tax-box'>
+            <div id="tax">Tax: </div>
+            <select id=tax-option>
+              <option value='0.00'>none</option>
+              <option value='.08875'>NY</option>
+            </select>
+          </div>
+          <div id='grat-box'>
+            <div id="grat">Gratuity: </div>
+            <select id='grat-option'>
+              <option value='0.00'>none</option>
+              <option value='0.10'>10%</option>
+              <option value='0.15'>15%</option>
+              <option value='0.20'>20%</option>
+            </select>
+          </div>
+          <div class='total-box'>
+            <span class='important'>Total: </span><span id='total'></span>
+          </div>
+          <div class='button-container'>
+            <input class='button' type='submit' value='Submit'>
+          </div>
+        </form>
+      </div>
+
+
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyDDwFPb9C0ia6t0IHMZYD9q3JI-t3QjaFY",
+        authDomain: "billegoat-b1829.firebaseapp.com",
+        databaseURL: "https://billegoat-b1829.firebaseio.com",
+        projectId: "billegoat-b1829",
+        storageBucket: "",
+        messagingSenderId: "250475015107"
+      };
+      firebase.initializeApp(config);
+    </script>
+    <script>
+      var theForm = document.getElementById('form-itself');
+
+      //Text Fields
+      var nameBox = document.getElementById('name');
+      var amount = document.getElementById('amount');
+      var tax = document.getElementById('tax');
+      var grat = document.getElementById('grat');
+      var total = document.getElementById('total');
+
+      //Option Fields
+      var taxOption = document.getElementById('tax-option');
+      var gratOption = document.getElementById('grat-option');
+
+      // Misc.
+      var db = firebase.database();
+      var d = new Date();
+      var t = d.getTime().toString();
+
+      //State
+      var state = {
+        name: '',
+        amount: 0.0,
+        tax: 0.0,
+        gratuity: 0.0,
+        total: ''
+      }
+
+      nameBox.addEventListener('keyup', function() {
+        state.name = this.value;
+      })
+
+      taxOption.addEventListener('change', function(e) {
+        state.tax = parseFloat(this.value);
+        calculateValues(state);
+        updateValues();
+      });
+
+      gratOption.addEventListener('change', function(e) {
+        state.gratuity = parseFloat(this.value);
+        calculateValues(state);
+        updateValues();
+      });
+
+      amount.addEventListener('keyup', function(e) {
+        state.amount = parseFloat(this.value);
+        calculateValues(state);
+        updateValues();
+      });
+
+      theForm.addEventListener('submit', function() {
+        if (state.total !== '' || state.total !== '0.00') {
+          var data = {
+            name: state.name,
+            tax: state.tax,
+            grat: state.gratuity,
+            date: d.toDateString(),
+            amount: state.total,
+            status: 'none'
+          }
+          db.ref(t).set(data);
+        }
+      });
+
+      function calculateValues(props) {
+        if (!isNaN(props.amount) && props.amount !== '') {
+          var amountTax = (props.amount * props.tax);
+          var amountGrat = (props.amount * props.gratuity);
+          var combined = parseFloat(props.amount) + parseFloat(amountTax) + parseFloat(amountGrat);
+          var total = (Math.round(combined * 100) / 100).toFixed(2);
+          props.total = total;
+          var obj = {
+            withTax: amountTax,
+            withGrat: amountGrat,
+            combined: total
+          };
+          return obj;
+
+        } else {
+          props.amount = 0.0;
+          props.total = '';
+        }
+      };
+
+      function updateValues() {
+        var values = calculateValues(state);
+
+        tax.innerHTML = 'Tax: $' + (Math.round(values.withTax * 100) / 100).toFixed(2);
+        grat.innerHTML = 'Gratuity: $' + (Math.round(values.withGrat * 100) / 100).toFixed(2);
+        total.innerHTML = '$' + values.combined;
+        console.log(state);
+      };
+    </script>
+
+  </body>
+  </html>

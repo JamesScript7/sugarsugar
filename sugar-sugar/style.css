@@ -1,0 +1,139 @@
+* {
+  font-family: sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  height: 100%;
+  background-color: #FFFFFF;
+}
+
+span, p {
+  margin: 1px;
+  color: #707070;
+  display: inline;
+}
+
+a {
+  text-decoration: none;
+}
+
+h3 {
+  margin: 0;
+  padding: 2px;
+  color: white;
+}
+
+div.top-menu form.home input.small {
+  display: inline-block;
+  float: right;
+  width: 80px;
+  margin-top: -26px;
+  margin-right: 5px;
+}
+
+div.login-form h3 {
+  color: #707070;
+}
+
+.top-menu {
+  height: 50px;
+  overflow: visible;
+}
+
+.list div {
+  padding: 12px 10px;
+  border: 1px solid silver;
+  margin: 8px;
+  box-shadow: 2px 2px 0 lightgrey;
+}
+
+div#top-menu {
+  background-color: #3399FF;
+  color: white;
+}
+
+div#drop-down {
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+div#content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+.button-container, div#grat-box, div#tax-box {
+  margin-top: 10px;
+  text-align: center;
+}
+
+input.button,
+div#grat-box select#grat-option,
+div#tax-box select#tax-option,
+div.name-box,
+div.amount-box,
+div.reason-box {
+  padding: 10px;
+  display: inline-block;
+  width: 80%;
+  text-align: center;
+}
+
+div.login-form form input.login {
+  width: 80%;
+  margin: 0 auto;
+  padding: 10px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+div.wrapper div.top-menu div.new-form {
+  padding: 15px;
+}
+
+#grat-option, #tax-option {
+  padding: 15px;
+  margin: 5px;
+}
+
+.total-box {
+  margin-top: 7px;
+  padding-top: 7px;
+  margin-right: 20px;
+  text-align: right;
+}
+
+div.total-box span.important, div.total-box span#total {
+  font-size: 1.5em;
+  color: #99FF33;
+}
+
+div#list h3 {
+  color: #707070;
+}
+
+div#content {
+  text-align: center;
+}
+.button {
+  font-weight: bold;
+}
+.delete {
+  background-color: coral;
+}
+
+div.list div.paid {
+  border: 10px solid #33FF99;
+}
