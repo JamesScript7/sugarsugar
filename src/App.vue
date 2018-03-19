@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <nav class="wrapper">
+    <nav id="navBar" class="wrapper">
       <div class="home">
         <router-link :to="{ name: 'Home' }">SugarSugar</router-link>
       </div>
@@ -55,6 +55,7 @@ footer {
   background-color: #0D2945;
   color: snow;
   position: relative;
+  box-shadow: inset 2px 10px 25px rgba(16, 16, 16, .3);
 }
 footer ul {
   list-style-type: none;
@@ -90,7 +91,7 @@ footer ul li a:hover {
   grid-column-gap: 1px;
   background-color: #68b4ff;
   padding: 10px 16px;
-  border-bottom: 2px solid #499bee;
+  border-bottom: 3px solid #499bee;
 }
 .home {
   text-align: left;
