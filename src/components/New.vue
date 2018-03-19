@@ -1,30 +1,30 @@
 <template>
   <div class="new">
-    <form id="form-itself" action="index.html">
+    <form id="form-itself" @submit="saveData" action="index.html">
       <h1>New Sugar</h1>
       <br>
       <div class="name-box">
-        <input id="name" type="text" name="name" placeholder="Name*" autocomplete="off" required />
+        <input id="name" type="text" name="name" placeholder="Name*" autocomplete="off" v-model="name" required />
       </div>
       <br>
       <div class="amount-box">
-        <input id="amount" type="number" name="amount" placeholder="Amount*" required />
+        <input id="amount" type="number" name="amount" placeholder="Amount*" v-model="amount" required />
       </div>
       <br>
       <div class="reason-box">
-        <textarea id="reason" type="text" name="reason" placeholder="For..."></textarea>
+        <textarea id="reason" type="text" name="reason" placeholder="For..." v-model="reason"></textarea>
       </div>
       <div class="option-box">
         <div id="tax-box">
-          <div id="tax">Tax: </div>
-          <select id=tax-option>
+          <div id="tax">Tax: {{ tax }}</div>
+          <select id="tax-option" v-model="tax">
             <option value="0.00">none</option>
             <option value=".08875">NY</option>
           </select>
         </div>
         <div id="grat-box">
-          <div id="grat">Gratuity: </div>
-          <select id="grat-option">
+          <div id="grat">Gratuity: {{ gratuity }}</div>
+          <select id="grat-option" v-model="gratuity">
             <option value="0.00">none</option>
             <option value="0.10">10%</option>
             <option value="0.15">15%</option>
@@ -33,7 +33,7 @@
         </div>
       </div>
       <div class="total-box">
-        <span class="important">Total: </span><span id="total">$0.00</span>
+        <span class="important">Total: </span><span id="total">${{ total }}</span>
       </div>
       <div class="button-container">
         <input class="button" type="submit" value="Submit">
@@ -45,11 +45,33 @@
 
 <script>
 import db from './firebaseInit'
+console.log('hi')
 export default {
   name: 'New',
   data () {
     return {
-      title: 'Sugar beta 1.0'
+      name: null,
+      amount: null,
+      reason: null,
+      tax: null,
+      gratuity: null,
+      total: 0.00,
+      date: null,
+      status: 'none'
+    }
+  },
+  methods: {
+    saveData () {
+      let d = new Date()
+      let t = d.getTime().toString()
+      db.ref(t).set({
+        name: this.name,
+        amount: this.amount,
+        reason: this.reason,
+        tax: this.tax,
+        gratuity: this.gratuity,
+        status: this.status
+      })
     }
   }
 }
@@ -58,10 +80,9 @@ export default {
 <style scoped>
 form {
   border: 1px solid #E0E0E0;
-  padding: 20px 26px;
-  margin: 30px 20px 0 20px;
+  padding: 40px;
   min-width: 250px;
-  box-shadow: 4px 4px #4DA6FF;
+  box-shadow: 4px 4px #a5d1ff;
   background-color: white;
 }
 label {
@@ -69,7 +90,7 @@ label {
 }
 input, textarea, select {
   font-family: 'Cabin', Helvetica, Arial, sans-serif;
-  font-size: .9em;
+  font-size: 1em;
   width: 100%;
   background-color: #F5F5F5;
   border: none;
@@ -95,12 +116,13 @@ h1 {
   display: inline-block;
   background-color: #0059B2;
   padding: 4px 18px;
+  margin: 0 0 50px 0;
   color: snow;
 }
 .new {
-  max-width: 500px;
+  max-width: 600px;
   margin: 0 auto;
-  padding-top: 110px;
+  padding-top: 115px;
 }
 .name-box, {
   text-align: left;
@@ -114,7 +136,8 @@ h1 {
 }
 .total-box {
   text-align: right;
-  padding: 12px 0;
+  font-size: 1.4em;
+  padding: 18px 0;
 }
 #total {
   display: inline-block;

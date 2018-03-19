@@ -28,7 +28,7 @@ html, body {
   margin: 0;
   box-sizing: border-box;
   height: 100%;
-  background-color: #99CCFF;
+  background-color: #F2F8FF;
 }
 a {
   text-decoration: none;
