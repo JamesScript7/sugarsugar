@@ -2,7 +2,7 @@
   <div id="app">
     <nav class="wrapper">
       <div class="home">
-        <router-link :to="{ name: 'Home' }">Sugar beta 1.0</router-link>
+        <router-link :to="{ name: 'Home' }">SugarSugar</router-link>
       </div>
       <div class="new-btn">
         <router-link to="/new" class="new-btn"><button>New</button></router-link>
@@ -11,13 +11,12 @@
     <router-view/>
     <footer>
       <ul class="footer-ul">
-        <li class="logo">Sugar beta 1.0</li>
-        <li>&copy; 2018 James Kim</li>
+        <li class="logo">SugarSugar</li>
+        <li>&copy; 2018 SugarSugar Beta 1.0</li>
+        <li><a href="http://james-kim.surge.sh/">James Kim</a></li>
         <li><a href="https://github.com/JamesScript7">Github</a></li>
         <li><a href="mailto:jameshkim@gmail.com">E-mail</a></li>
       </ul>
-      <div></div>
-      <div></div>
     </footer>
   </div>
 </template>
@@ -47,6 +46,7 @@ a {
 nav {
   position: fixed;
   top: 0;
+  z-index: 1000;
   width: 100%;
 }
 footer {
@@ -54,6 +54,7 @@ footer {
   padding: 50px 0 40px 50px;
   background-color: #0D2945;
   color: snow;
+  position: relative;
 }
 footer ul {
   list-style-type: none;
@@ -72,6 +73,7 @@ footer ul li a:hover {
   color: #0066CC;
 }
 #app {
+  position: relative;
   font-family: 'Cabin', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

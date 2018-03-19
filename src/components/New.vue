@@ -1,10 +1,10 @@
 <template>
   <div class="new">
-    <form id="form-itself" @submit="saveData" action="index.html">
+    <form id="form-itself" @submit="saveData" action="index.html" autocomplete="off">
       <h1>New Sugar</h1>
       <br>
       <div class="name-box">
-        <input id="name" type="text" name="name" placeholder="Name*" autocomplete="off" v-model="name" required />
+        <input id="name" type="text" name="name" placeholder="Name*" v-model="name" required />
       </div>
       <br>
       <div class="amount-box">
@@ -78,6 +78,7 @@ export default {
       const d = new Date()
       this.date = d.getTime().toString()
       let data = {
+        id: this.date,
         name: this.name,
         amount: this.amount,
         reason: this.reason,
@@ -125,7 +126,7 @@ form {
   border: 1px solid #E0E0E0;
   padding: 40px;
   min-width: 250px;
-  box-shadow: 5px 5px #a5d1ff;
+  box-shadow: 4px 4px #c2defd;
   background-color: white;
 }
 label {
@@ -137,7 +138,7 @@ input, textarea, select {
   width: 100%;
   background-color: #F5F5F5;
   border: none;
-  padding: 12px;
+  padding: 16px;
 }
 /* Chrome/Opera/Safari */
 ::-webkit-input-placeholder {
@@ -167,7 +168,7 @@ input, textarea, select {
   text-align: right;
 }
 #tax-box, #grat-box, #tax, #grat, .total-box {
-  font-size: 1.1em;
+  font-size: 1em;
   padding: 6px 0;
 }
 .total-box {
