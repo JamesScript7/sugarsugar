@@ -9,6 +9,16 @@
       </div>
     </nav>
     <router-view/>
+    <footer>
+      <ul class="footer-ul">
+        <li class="logo">Sugar beta 1.0</li>
+        <li>&copy; 2018 James Kim</li>
+        <li><a href="https://github.com/JamesScript7">Github</a></li>
+        <li><a href="mailto:jameshkim@gmail.com">E-mail</a></li>
+      </ul>
+      <div></div>
+      <div></div>
+    </footer>
   </div>
 </template>
 
@@ -39,6 +49,28 @@ nav {
   top: 0;
   width: 100%;
 }
+footer {
+  margin-top: 50px;
+  padding: 50px 0 40px 50px;
+  background-color: #0D2945;
+  color: snow;
+}
+footer ul {
+  list-style-type: none;
+  padding: 0;
+}
+footer ul li {
+  display: block;
+  padding: 10px;
+  line-height: 15px;
+  text-align: left;
+}
+.footer-ul li:first-child {
+  padding-bottom: 40px;
+}
+footer ul li a:hover {
+  color: #0066CC;
+}
 #app {
   font-family: 'Cabin', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -46,7 +78,7 @@ nav {
   text-align: center;
   color: #2c3e50;
 }
-.router-link-active, button {
+.router-link-active, button, .logo {
   font-family: 'Pacifico', cursive, sans-serif;
   font-size: 1.3rem;
 }
@@ -65,6 +97,9 @@ nav {
 }
 .new-btn {
   text-align: right;
+}
+.logo {
+  font-size: 1.7em;
 }
 button {
   font-weight: bold;

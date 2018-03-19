@@ -125,7 +125,7 @@ form {
   border: 1px solid #E0E0E0;
   padding: 40px;
   min-width: 250px;
-  box-shadow: 4px 4px #a5d1ff;
+  box-shadow: 5px 5px #a5d1ff;
   background-color: white;
 }
 label {

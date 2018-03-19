@@ -1,6 +1,8 @@
 <template>
   <div class="container">
-    <div id="list" class="list-parent"></div>
+    <main id="list" class="list-div">
+
+    </main>
   </div>
 </template>
 
