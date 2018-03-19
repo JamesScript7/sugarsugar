@@ -16,14 +16,14 @@
       </div>
       <div class="option-box">
         <div id="tax-box">
-          <div id="tax">Tax: {{ tax }}</div>
+          <div id="tax">Tax: ${{ taxView }}</div>
           <select id="tax-option" v-model="tax">
             <option value="0.00">none</option>
             <option value=".08875">NY</option>
           </select>
         </div>
         <div id="grat-box">
-          <div id="grat">Gratuity: {{ gratuity }}</div>
+          <div id="grat">Gratuity: ${{ gratuityView }}</div>
           <select id="grat-option" v-model="gratuity">
             <option value="0.00">none</option>
             <option value="0.10">10%</option>
@@ -33,7 +33,7 @@
         </div>
       </div>
       <div class="total-box">
-        <span class="important">Total: </span><span id="total">${{ total }}</span>
+        <span class="important">Total: </span><span id="total">${{ totalView }}</span>
       </div>
       <div class="button-container">
         <input class="button" type="submit" value="Submit">
@@ -53,45 +53,74 @@ export default {
       amount: null,
       reason: null,
       tax: null,
-      gratuity: null,
+      gratuity: 0.00,
       total: 0.00,
       date: null,
-      status: 'none'
+      status: 'none',
+      taxView: 0.00,
+      gratuityView: 0.00,
+      totalView: 0.00
     }
   },
   watch: {
     amount: function (val) {
-      console.log(val)
+      this.calculateValues(parseFloat(val))
     },
     tax: function (val) {
-      console.log(val)
-      console.log(this.name)
+      this.calculateValues(parseFloat(val))
     },
     gratuity: function (val) {
-      console.log(val)
+      this.calculateValues(parseFloat(val))
     }
   },
   methods: {
     saveData () {
-      let d = new Date()
-      let t = d.getTime().toString()
-      db.ref(t).set({
+      const d = new Date()
+      this.date = d.getTime().toString()
+      let data = {
         name: this.name,
         amount: this.amount,
         reason: this.reason,
-        tax: this.tax,
-        gratuity: this.gratuity,
+        tax: this.taxView,
+        gratuity: this.gratuityView,
+        total: this.totalView,
+        date: d.toDateString(),
         status: this.status
-      })
+      }
+      if (this.totalView !== '' && this.totalView > 0) {
+        console.log(data)
+        db.ref(this.date).set(data)
+      } else {
+        this.totalView = 'Please Enter an Amount!'
+      }
     },
-    updateValues (e) {
-      console.log(e)
+    calculateValues (val) {
+      if (isNaN(val)) {
+        this.amount = null
+        this.tax = 0.00
+        this.taxView = 0
+        this.gratuity = 0.00
+        this.gratuityView = 0
+        this.total = 0.00
+        this.totalView = 0.00
+      } else if (!isNaN(this.amount) && this.amount !== '' && this.amount > 0) {
+        this.taxView = (this.amount * this.tax).toFixed(2)
+        this.gratuityView = (this.amount * this.gratuity).toFixed(2)
+        this.totalView = (parseFloat(this.amount) + parseFloat(this.taxView) + parseFloat(this.gratuityView)).toFixed(2)
+      }
     }
   }
 }
 </script>
 
 <style scoped>
+h1 {
+  display: inline-block;
+  background-color: #0059B2;
+  padding: 4px 18px;
+  margin: 0 0 50px 0;
+  color: snow;
+}
 form {
   border: 1px solid #E0E0E0;
   padding: 40px;
@@ -125,13 +154,6 @@ input, textarea, select {
 /* Firefox 18- */
 :-moz-placeholder {
   color: #68b4ff;
-}
-h1 {
-  display: inline-block;
-  background-color: #0059B2;
-  padding: 4px 18px;
-  margin: 0 0 50px 0;
-  color: snow;
 }
 .new {
   max-width: 600px;
