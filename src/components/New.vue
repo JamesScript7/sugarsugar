@@ -45,7 +45,6 @@
 
 <script>
 import db from './firebaseInit'
-console.log('hi')
 export default {
   name: 'New',
   data () {
@@ -60,6 +59,18 @@ export default {
       status: 'none'
     }
   },
+  watch: {
+    amount: function (val) {
+      console.log(val)
+    },
+    tax: function (val) {
+      console.log(val)
+      console.log(this.name)
+    },
+    gratuity: function (val) {
+      console.log(val)
+    }
+  },
   methods: {
     saveData () {
       let d = new Date()
@@ -72,6 +83,9 @@ export default {
         gratuity: this.gratuity,
         status: this.status
       })
+    },
+    updateValues (e) {
+      console.log(e)
     }
   }
 }
@@ -127,7 +141,7 @@ h1 {
 .name-box, {
   text-align: left;
 }
-.option-box {
+.option-box, .button-container {
   text-align: right;
 }
 #tax-box, #grat-box, #tax, #grat, .total-box {
@@ -143,9 +157,6 @@ h1 {
   display: inline-block;
   min-width: 56px;
   color: #33FF99;
-}
-.button-container {
-  text-align: right;
 }
 .button {
   font-weight: bold;
