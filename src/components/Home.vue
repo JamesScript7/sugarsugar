@@ -1,5 +1,7 @@
 <template>
-  <h1>Home</h1>
+  <div class="container">
+    <div id="list" class="list-parent"></div>
+  </div>
 </template>
 
 <script>
@@ -7,7 +9,9 @@ export default {
   name: 'Home',
   data () {
     return {
-      title: 'Sugar beta 1.0'
+      name: '',
+      amount: '',
+      date: ''
     }
   }
 }

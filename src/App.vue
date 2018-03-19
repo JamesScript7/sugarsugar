@@ -1,8 +1,12 @@
 <template>
   <div id="app">
     <nav class="wrapper">
-      <router-link :to="{ name: 'Home' }" class="home">Sugar beta 1.0</router-link>
-      <router-link to="/new" class="new-btn"><button>New</button></router-link>
+      <div class="home">
+        <router-link :to="{ name: 'Home' }">Sugar beta 1.0</router-link>
+      </div>
+      <div class="new-btn">
+        <router-link to="/new" class="new-btn"><button>New</button></router-link>
+      </div>
     </nav>
     <router-view/>
   </div>
@@ -18,6 +22,16 @@ export default {
 html, body {
   padding: 0;
   margin: 0;
+}
+a {
+  text-decoration: none;
+  color: snow;
+}
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -36,11 +50,9 @@ html, body {
   grid-column-gap: 1px;
   background-color: #3399FF;
   padding: 10px 16px;
-  border-bottom: 3px solid #0066CC;
+  border-bottom: 2px solid #347dc7;
 }
 .home {
-  text-decoration: none;
-  color: snow;
   text-align: left;
   font-size: 20px;
   align-self: center;
@@ -49,17 +61,17 @@ html, body {
   text-align: right;
 }
 button {
-  background: #ff3399;
-  border: none;
-  padding: 7px;
-  color: snow;
   font-weight: bold;
   width: 90px;
-  border-right: 3px solid #ea2f8c;
+  padding: 7px;
+  border: none;
+  border-right: 4px solid #d52d81;
+  background-color: #f64da1;
+  box-shadow: 2px 2px #0066CC;
+  color: snow;
 }
 button:hover {
-  color: snow;
-  background-color: #fa439e;
-  box-shadow: 2px 2px #0066CC;
+  background: #ff3399;
+  box-shadow: none;
 }
 </style>
