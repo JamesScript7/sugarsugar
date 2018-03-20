@@ -62,7 +62,7 @@ img {
 }
 .container {
   padding-top: 80px;
-  min-height: 820px;
+  min-height: 900px;
 }
 main.list-div {
   display: -webkit-box;
@@ -134,6 +134,23 @@ ul.info-ul {
 }
 .row:nth-child(7) {
   animation-delay: 1.3s;
+}
+@media screen and (max-width: 550px) {
+  img {
+    width: 80px;
+    height: 80px;
+  }
+  .item {
+    min-height: 80px;
+    margin-bottom: 6px;
+    box-shadow: 2px 2px #c2defd;
+  }
+  .name {
+  font-weight: bold;
+  }
+  .name, .total {
+    font-size: 1.1em;
+  }
 }
 @keyframes fadeIn {
   0% {opacity: 0;}

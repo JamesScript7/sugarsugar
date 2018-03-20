@@ -213,6 +213,12 @@ input, textarea, select {
   background: #ff3399;
   box-shadow: none;
 }
+@media screen and (max-width: 550px) {
+  form {
+    border: 0 solid #E0E0E0;
+    box-shadow: none;
+  }
+}
 @keyframes slideIn {
   0% {
       margin-left: 10%;

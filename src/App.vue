@@ -32,7 +32,7 @@ export default {
   box-sizing: inherit;
 }
 html, body {
-  font-size: 20px;
+  font-size: 16px;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -64,7 +64,7 @@ footer ul {
 footer ul li {
   display: block;
   padding: 10px;
-  line-height: 15px;
+  line-height: 12px;
   text-align: left;
 }
 .footer-ul li:first-child {
@@ -83,7 +83,7 @@ footer ul li a:hover {
 }
 .router-link-active, button, .logo {
   font-family: 'Pacifico', cursive, sans-serif;
-  font-size: 1.2rem;
+  font-size: 1.6rem;
 }
 .wrapper {
   display: grid;
@@ -91,7 +91,7 @@ footer ul li a:hover {
   grid-column-gap: 1px;
   background-color: #2062A3;
   padding: 10px 16px;
-  border-bottom: 3px solid #0D2945;
+  border-bottom: 3px solid #1d5892;
 }
 .home {
   text-align: left;
@@ -105,8 +105,8 @@ footer ul li a:hover {
   font-size: 1.7em;
 }
 button {
-  width: 120px;
-  padding: 3px;
+  width: 110px;
+  padding: 4px;
   border: none;
   border-right: 4px solid #d52d81;
   border-radius: 2px;
@@ -117,5 +117,16 @@ button {
 button:hover {
   background: #ff3399;
   box-shadow: none;
+}
+@media screen and (max-width: 550px) {
+  .router-link-active, button, .logo {
+    font-size: 1.2rem;
+  }
+  footer {
+    padding: 30px 0 40px 20px;
+  }
+  button {
+    width: 90px;
+  }
 }
 </style>
