@@ -14,8 +14,8 @@ new Vue({
 let navBar = document.getElementById('navBar')
 window.addEventListener('scroll', function () {
   if (window.pageYOffset > 20) {
-    navBar.style.transition = 'box-shadow .5s ease-in-out'
-    navBar.style.boxShadow = '4px 2px 15px 3px rgba(73, 155, 238, .3)'
+    navBar.style.transition = 'box-shadow .2s ease-in-out'
+    navBar.style.boxShadow = '4px 2px 15px 3px rgba(13, 41, 69, .3)'
   } else {
     navBar.style.boxShadow = 'none'
   }

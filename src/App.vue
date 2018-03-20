@@ -12,7 +12,7 @@
     <footer>
       <ul class="footer-ul">
         <li class="logo">SugarSugar</li>
-        <li>&copy; 2018 SugarSugar Beta 1.0</li>
+        <li>&copy; 2018 SugarSugar beta 1.0</li>
         <li><a href="http://james-kim.surge.sh/">James Kim</a></li>
         <li><a href="https://github.com/JamesScript7">Github</a></li>
         <li><a href="mailto:jameshkim@gmail.com">E-mail</a></li>
@@ -37,7 +37,7 @@ html, body {
   margin: 0;
   box-sizing: border-box;
   height: 100%;
-  background-color: #F2F8FF;
+  background-color: snow;
 }
 a {
   text-decoration: none;
@@ -89,9 +89,9 @@ footer ul li a:hover {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 1px;
-  background-color: #68b4ff;
+  background-color: #2062A3;
   padding: 10px 16px;
-  border-bottom: 3px solid #499bee;
+  border-bottom: 3px solid #0D2945;
 }
 .home {
   text-align: left;
@@ -105,19 +105,17 @@ footer ul li a:hover {
   font-size: 1.7em;
 }
 button {
-  font-weight: bold;
   width: 120px;
-  padding: 7px;
+  padding: 6px;
   border: none;
   border-right: 4px solid #d52d81;
   border-radius: 2px;
   background-color: #f64da1;
-  box-shadow: 2px 2px #0066CC;
+  box-shadow: 2px 2px #0D2945;
   color: snow;
 }
 button:hover {
   background: #ff3399;
   box-shadow: none;
-  box-shadow: -1px -1px #B8B8B8;
 }
 </style>

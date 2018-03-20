@@ -212,7 +212,6 @@ input, textarea, select {
 .button:hover {
   background: #ff3399;
   box-shadow: none;
-  box-shadow: -1px -1px #B8B8B8;
 }
 @keyframes slideIn {
   0% {

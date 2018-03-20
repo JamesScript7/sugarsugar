@@ -7,12 +7,12 @@
             <img v-bind:src="list.animal"/>
             <div class="info-box">
               <ul class="info-ul">
-                <li>{{list.date}}</li>
-                <li class="name">Name: {{list.name}}</li>
-                <li class="total">Total: {{list.total}}</li>
+                <li class="name">{{list.name}}</li>
+                <li>Total: <span class="total">{{list.total}}</span></li>
                 <li>For: {{list.reason}}</li>
               </ul>
             </div>
+            <div>{{list.date}}</div>
           </div>
         </div>
       </div>
@@ -72,7 +72,7 @@ main.list-div {
 .item {
   min-height: 150px;
   max-width: 700px;
-  padding: 14px;
+  padding: 12px;
   margin: 0 auto;
   margin-bottom: 16px;
   background-color: white;
@@ -84,7 +84,7 @@ main.list-div {
 }
 ul.info-ul {
   list-style-type: none;
-  padding: 10px 5px 10px 20px;
+  padding: 5px 5px 5px 10px;
   margin: 0;
   text-align: left;
 }
