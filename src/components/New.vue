@@ -76,7 +76,6 @@ export default {
   watch: {
     amount: function (val) {
       this.calculateValues(parseFloat(val))
-      console.log(this.svg)
     },
     tax: function (val) {
       this.calculateValues(parseFloat(val))
@@ -88,6 +87,7 @@ export default {
   methods: {
     saveData () {
       const d = new Date()
+      let formatDate = d.toDateString().split(' ').slice(1).join(' ')
       this.date = d.getTime().toString()
       let data = {
         id: this.date,
@@ -98,7 +98,7 @@ export default {
         tax: this.taxView,
         gratuity: this.gratuityView,
         total: this.totalView,
-        date: d.toDateString(),
+        date: formatDate,
         status: this.status
       }
       if (this.totalView !== '' && this.totalView > 0) {

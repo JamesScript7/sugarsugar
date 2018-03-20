@@ -37,7 +37,7 @@ html, body {
   margin: 0;
   box-sizing: border-box;
   height: 100%;
-  background-color: snow;
+  background-color: #F8F8F8;
 }
 a {
   text-decoration: none;
@@ -51,7 +51,7 @@ nav {
 }
 footer {
   margin-top: 50px;
-  padding: 50px 0 40px 50px;
+  padding: 40px 0 40px 30px;
   background-color: #0D2945;
   color: snow;
   position: relative;
@@ -83,7 +83,7 @@ footer ul li a:hover {
 }
 .router-link-active, button, .logo {
   font-family: 'Pacifico', cursive, sans-serif;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 }
 .wrapper {
   display: grid;
@@ -106,7 +106,7 @@ footer ul li a:hover {
 }
 button {
   width: 120px;
-  padding: 6px;
+  padding: 3px;
   border: none;
   border-right: 4px solid #d52d81;
   border-radius: 2px;

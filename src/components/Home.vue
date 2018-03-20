@@ -12,7 +12,9 @@
                 <li>For: {{list.reason}}</li>
               </ul>
             </div>
-            <div>{{list.date}}</div>
+            <div class="date">
+              {{list.date}}
+            </div>
           </div>
         </div>
       </div>
@@ -72,7 +74,7 @@ main.list-div {
 .item {
   min-height: 150px;
   max-width: 700px;
-  padding: 12px;
+  padding: 10px;
   margin: 0 auto;
   margin-bottom: 16px;
   background-color: white;
@@ -100,6 +102,9 @@ ul.info-ul {
 }
 .name, .total {
   font-size: 1.3em;
+}
+.date {
+  margin-right: 0;
 }
 .center {
   animation: scale 1s;
