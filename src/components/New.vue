@@ -1,7 +1,12 @@
 <template>
   <div class="new">
     <form id="form-itself" @submit="saveData" action="index.html" autocomplete="off">
-      <h1>New Sugar</h1>
+      <div class="new-sugar">
+        <img v-bind:src="this.svg"/>
+        <div>
+          <h1>New Sugar</h1>
+        </div>
+      </div>
       <br>
       <div class="name-box">
         <input id="name" type="text" name="name" placeholder="Name*" v-model="name" required />
@@ -60,12 +65,18 @@ export default {
       taxView: 0.00,
       gratuityView: 0.00,
       totalView: 0.00,
-      animal: ['bat','bear','bee','bird','bug','butterfly','camel','cat','cheetah','chicken','coala','cow','crocodile','dinosaur','dog','dolphin','dove','duck','eagle','elephant','fish','flamingo','fox','frog','giraffe','gorilla', 'horse', 'kangaroo','leopard','lion','monkey','mouse','panda','parrot','penguin','shark','sheep','snake','spider','squirrel','star-fish','tiger','turtle','wolf','zebra']
+      svg: null,
+      animal: ['bat', 'bear', 'bee', 'bird', 'bug', 'butterfly', 'camel', 'cat', 'cheetah', 'chicken', 'coala', 'cow', 'crocodile', 'dinosaur', 'dog', 'dolphin', 'dove', 'duck', 'eagle', 'elephant', 'fish', 'flamingo', 'fox', 'frog', 'giraffe', 'gorilla', 'horse', 'kangoroo', 'leopard', 'lion', 'monkey', 'mouse', 'panda', 'parrot', 'penguin', 'shark', 'sheep', 'snake', 'spider', 'squirrel', 'star-fish', 'tiger', 'turtle', 'wolf', 'zebra', 'turtle']
     }
+  },
+  beforeMount () {
+    const d = new Date()
+    this.svg = `static/SVG/${this.animal[(d.getMilliseconds() % 45)]}.svg`
   },
   watch: {
     amount: function (val) {
       this.calculateValues(parseFloat(val))
+      console.log(this.svg)
     },
     tax: function (val) {
       this.calculateValues(parseFloat(val))
@@ -80,6 +91,7 @@ export default {
       this.date = d.getTime().toString()
       let data = {
         id: this.date,
+        animal: this.svg,
         name: this.name,
         amount: this.amount,
         reason: this.reason,
@@ -120,7 +132,6 @@ h1 {
   display: inline-block;
   background-color: #0059B2;
   padding: 4px 18px;
-  margin: 0 0 50px 0;
   color: snow;
 }
 form {
@@ -157,6 +168,8 @@ input, textarea, select {
 :-moz-placeholder {
   color: #68b4ff;
 }
+.new-sugar {
+}
 .new {
   max-width: 600px;
   margin: 0 auto;
@@ -164,6 +177,9 @@ input, textarea, select {
 }
 .name-box, {
   text-align: left;
+}
+#form-itself {
+  animation: slideIn 1s;
 }
 .option-box, .button-container {
   text-align: right;
@@ -197,5 +213,15 @@ input, textarea, select {
   background: #ff3399;
   box-shadow: none;
   box-shadow: -1px -1px #B8B8B8;
+}
+@keyframes slideIn {
+  0% {
+      margin-left: 10%;
+      margin-right: 20%;
+    }
+  100% {
+    margin-left: 0%;
+    margin-right: 0%;
+  }
 }
 </style>

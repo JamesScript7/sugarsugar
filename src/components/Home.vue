@@ -4,12 +4,12 @@
       <div class="item-container">
         <div class="center">
           <div class="item row" v-for="(list, index) in lists" :key="index" :id="index">
-            <img src="static/SVG/bird.svg"/>
+            <img v-bind:src="list.animal"/>
             <div class="info-box">
               <ul class="info-ul">
                 <li>{{list.date}}</li>
-                <li>Name: {{list.name}}</li>
-                <li>Total: {{list.total}}</li>
+                <li class="name">Name: {{list.name}}</li>
+                <li class="total">Total: {{list.total}}</li>
                 <li>For: {{list.reason}}</li>
               </ul>
             </div>
@@ -26,7 +26,8 @@ export default {
   name: 'Home',
   data () {
     return {
-      lists: []
+      lists: [],
+      arr: []
     }
   },
   beforeMount () {
@@ -36,8 +37,9 @@ export default {
     fetchData () {
       db.ref().once('value', data => {
         for (let key in data.val()) {
-          this.lists.push(data.val()[key])
+          this.arr.push(data.val()[key])
         }
+        this.lists = this.arr.reverse()
       })
     }
   }
@@ -45,9 +47,20 @@ export default {
 </script>
 
 <style scoped>
+[v-cloak] {
+  display:none;
+}
+a {
+text-decoration: none;
+}
 img {
   width: 150px;
   height: 150px;
+  animation: pop 1.2s;
+}
+.container {
+  padding-top: 80px;
+  min-height: 820px;
 }
 main.list-div {
   display: -webkit-box;
@@ -59,7 +72,7 @@ main.list-div {
 .item {
   min-height: 150px;
   max-width: 700px;
-  padding: 10px;
+  padding: 14px;
   margin: 0 auto;
   margin-bottom: 16px;
   background-color: white;
@@ -80,40 +93,20 @@ ul.info-ul {
 }
 .item-container {
   margin-top: 30px;
-  width: 98%;
+  width: 100%;
 }
-[v-cloak] {
-  display:none
+.item.row:hover {
+  box-shadow: 2px 2px #c2defd;
 }
-h1, h2 {
-  font-weight: normal;
+.name, .total {
+  font-size: 1.3em;
 }
-ul.list-parent {
-  display: inline-block;
-  list-style-type: none;
-  padding: 0;
-  max-width: 800px;
-}
-li.row {
-  display: inline-block;
-  width: 90%;
-  padding: 50px;
-  margin: 7px 0;
-  background-color: white;
-  box-shadow: 4px 4px #c2defd;
-}
-li.row:hover {
-  box-shadow: 1px 1px #c2defd;
-}
-a {
-  text-decoration: none;
-}
-.container {
-  padding-top: 80px;
-  min-height: 600px;
+.center {
+  animation: scale 1s;
 }
 .row {
   opacity: 0;
+  transform: scale(1);
   animation: fadeIn 1s forwards;
 }
 .row:nth-child(1) {
@@ -140,5 +133,14 @@ a {
 @keyframes fadeIn {
   0% {opacity: 0;}
   100% {opacity: 1;}
+}
+@keyframes scale {
+  0% {transform: scale(0.8);}
+  100% {transform: scale(1);}
+}
+@keyframes pop {
+  0% {transform: scale(0.2);}
+  50% {transform: scale(1.1);}
+  100% {transform: scale(1);}
 }
 </style>
