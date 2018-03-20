@@ -15,7 +15,7 @@ let navBar = document.getElementById('navBar')
 window.addEventListener('scroll', function () {
   if (window.pageYOffset > 20) {
     navBar.style.transition = 'box-shadow .5s ease-in-out'
-    navBar.style.boxShadow = '4px 2px 15px 3px rgba(0, 0, 255, .2)'
+    navBar.style.boxShadow = '4px 2px 15px 3px rgba(73, 155, 238, .3)'
   } else {
     navBar.style.boxShadow = 'none'
   }

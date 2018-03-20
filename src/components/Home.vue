@@ -1,19 +1,21 @@
 <template>
   <div class="container">
     <main id="list" class="list-div">
-      <ul>
-        <li class="row" v-for="(list, index) in lists" :key="index" :id="index">
-          {{list.id}}
-          {{list.name}}
-          {{list.amount}}
-          {{list.reason}}
-          {{list.tax}}
-          {{list.gratuity}}
-          {{list.total}}
-          {{list.date}}
-          {{list.status}}
-        </li>
-      </ul>
+      <div class="item-container">
+        <div class="center">
+          <div class="item row" v-for="(list, index) in lists" :key="index" :id="index">
+            <img src="http://via.placeholder.com/150x150"/>
+            <div class="info-box">
+              <ul class="info-ul">
+                <li>{{list.date}}</li>
+                <li>Name: {{list.name}}</li>
+                <li>Total: {{list.total}}</li>
+                <li>For: {{list.reason}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
   </div>
 </template>
@@ -43,19 +45,51 @@ export default {
 </script>
 
 <style scoped>
+main.list-div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: center;
+}
+.item {
+  min-height: 150px;
+  max-width: 700px;
+  margin: 0 auto;
+  margin-bottom: 16px;
+  background-color: white;
+  box-shadow: 4px 4px #c2defd;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+ul.info-ul {
+  list-style-type: none;
+  padding: 10px 5px 10px 16px;
+  margin: 0;
+  text-align: left;
+}
+.info-box {
+  display: inline-block;
+}
+.item-container {
+  margin-top: 30px;
+  width: 98%;
+}
 [v-cloak] {
   display:none
 }
 h1, h2 {
   font-weight: normal;
 }
-ul {
+ul.list-parent {
   display: inline-block;
   list-style-type: none;
   padding: 0;
   max-width: 800px;
 }
-li {
+li.row {
   display: inline-block;
   width: 90%;
   padding: 50px;
@@ -63,7 +97,7 @@ li {
   background-color: white;
   box-shadow: 4px 4px #c2defd;
 }
-li:hover {
+li.row:hover {
   box-shadow: 1px 1px #c2defd;
 }
 a {
@@ -102,5 +136,4 @@ a {
   0% {opacity: 0;}
   100% {opacity: 1;}
 }
-
 </style>
