@@ -59,7 +59,8 @@ export default {
       status: 'none',
       taxView: 0.00,
       gratuityView: 0.00,
-      totalView: 0.00
+      totalView: 0.00,
+      animal: ['bat','bear','bee','bird','bug','butterfly','camel','cat','cheetah','chicken','coala','cow','crocodile','dinosaur','dog','dolphin','dove','duck','eagle','elephant','fish','flamingo','fox','frog','giraffe','gorilla', 'horse', 'kangaroo','leopard','lion','monkey','mouse','panda','parrot','penguin','shark','sheep','snake','spider','squirrel','star-fish','tiger','turtle','wolf','zebra']
     }
   },
   watch: {

@@ -4,7 +4,7 @@
       <div class="item-container">
         <div class="center">
           <div class="item row" v-for="(list, index) in lists" :key="index" :id="index">
-            <img src="http://via.placeholder.com/150x150"/>
+            <img src="static/SVG/bird.svg"/>
             <div class="info-box">
               <ul class="info-ul">
                 <li>{{list.date}}</li>
@@ -45,6 +45,10 @@ export default {
 </script>
 
 <style scoped>
+img {
+  width: 150px;
+  height: 150px;
+}
 main.list-div {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -55,6 +59,7 @@ main.list-div {
 .item {
   min-height: 150px;
   max-width: 700px;
+  padding: 10px;
   margin: 0 auto;
   margin-bottom: 16px;
   background-color: white;
@@ -66,7 +71,7 @@ main.list-div {
 }
 ul.info-ul {
   list-style-type: none;
-  padding: 10px 5px 10px 16px;
+  padding: 10px 5px 10px 20px;
   margin: 0;
   text-align: left;
 }
