@@ -1,15 +1,16 @@
 <template>
   <div class="container">
+    <div class="loader" v-if="loader"><img src="/static/loading-cat.svg"/></div>
     <main id="list" class="list-div">
       <div class="item-container">
         <div class="center">
           <div class="item row" v-for="(list, index) in lists" :key="index" :id="index">
-            <img v-bind:src="list.animal"/>
+            <img class="img-list" v-bind:src="list.animal" v-bind:alt="list.animal"/>
             <div class="info-box">
               <ul class="info-ul">
                 <li class="name">{{list.name}}</li>
-                <li>Total: <span class="total">{{list.total}}</span></li>
-                <li>For: {{list.reason}}</li>
+                <li class="total">Total: <span>{{list.total}}</span></li>
+                <li class="for">For: {{list.reason}}</li>
               </ul>
             </div>
             <div class="date">
@@ -29,7 +30,8 @@ export default {
   data () {
     return {
       lists: [],
-      arr: []
+      arr: [],
+      loader: true
     }
   },
   beforeMount () {
@@ -38,10 +40,14 @@ export default {
   methods: {
     fetchData () {
       db.ref().once('value', data => {
-        for (let key in data.val()) {
-          this.arr.push(data.val()[key])
-        }
-        this.lists = this.arr.reverse()
+        let self = this
+        setTimeout(function () {
+          self.loader = false
+          for (let key in data.val()) {
+            self.arr.push(data.val()[key])
+          }
+          self.lists = self.arr.reverse()
+        }, 1500)
       })
     }
   }
@@ -49,16 +55,16 @@ export default {
 </script>
 
 <style scoped>
-[v-cloak] {
-  display:none;
-}
 a {
 text-decoration: none;
 }
-img {
-  width: 150px;
-  height: 150px;
+img.img-list {
+  width: 125px;
+  height: 125px;
   animation: pop 1.2s;
+}
+.loader {
+  margin-top: 80px;
 }
 .container {
   padding-top: 80px;
@@ -72,6 +78,7 @@ main.list-div {
   justify-content: center;
 }
 .item {
+  font-size: 20px;
   min-height: 150px;
   max-width: 700px;
   padding: 10px;
@@ -83,6 +90,7 @@ main.list-div {
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
+  justify-content: space-between;
 }
 ul.info-ul {
   list-style-type: none;
@@ -92,6 +100,7 @@ ul.info-ul {
 }
 .info-box {
   display: inline-block;
+  min-width: 50%;
 }
 .item-container {
   margin-top: 30px;
@@ -100,14 +109,18 @@ ul.info-ul {
 .item.row:hover {
   box-shadow: 2px 2px #c2defd;
 }
-.name, .total {
-  font-size: 1.3em;
+.name {
+  font-size: 1.5em;
 }
-.date {
-  margin-right: 0;
+.total {
+  color: green;
+}
+.for {
+  color: gray;
 }
 .center {
-  animation: scale 1s;
+  animation: scale 1.5s;
+  animation-delay: 1.5s;
 }
 .row {
   opacity: 0;
@@ -136,17 +149,18 @@ ul.info-ul {
   animation-delay: 1.3s;
 }
 @media screen and (max-width: 550px) {
-  img {
+  img.img-list {
     width: 80px;
     height: 80px;
   }
   .item {
+    font-size: 16px;
     min-height: 80px;
     margin-bottom: 6px;
     box-shadow: 2px 2px #c2defd;
   }
   .name {
-  font-weight: bold;
+    font-weight: bold;
   }
   .name, .total {
     font-size: 1.1em;

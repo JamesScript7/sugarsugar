@@ -2,7 +2,7 @@
   <div class="new">
     <form id="form-itself" @submit="saveData" action="index.html" autocomplete="off">
       <div class="new-sugar">
-        <img v-bind:src="this.svg"/>
+        <img v-bind:src="this.svg" v-bind:alt="this.svg"/>
         <div>
           <h1>New Sugar</h1>
         </div>
@@ -70,8 +70,8 @@ export default {
     }
   },
   beforeMount () {
-    const d = new Date()
-    this.svg = `static/SVG/${this.animal[(d.getMilliseconds() % 45)]}.svg`
+    let randomNum = Math.round((Math.random() * 100) % 45)
+    this.svg = `static/SVG/${this.animal[randomNum]}.svg`
   },
   watch: {
     amount: function (val) {
@@ -217,6 +217,9 @@ input, textarea, select {
   form {
     border: 0 solid #E0E0E0;
     box-shadow: none;
+  }
+  input, textarea, select {
+    padding: 12px;
   }
 }
 @keyframes slideIn {
