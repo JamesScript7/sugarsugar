@@ -1,13 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
 // COMPONENTS:
 import Home from '@/components/Home'
 import New from '@/components/New'
 import HistoryPage from '@/components/HistoryPage'
-
 Vue.use(Router)
-
 export default new Router({
   routes: [
     {

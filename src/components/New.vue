@@ -8,7 +8,7 @@
         </div>
       </div>
       <br>
-      <div class="name-box">
+      <div>
         <input id="name" type="text" name="name" placeholder="Name*" v-model="name" required />
       </div>
       <br>
@@ -137,22 +137,28 @@ h1 {
   color: snow;
 }
 form {
-  border: 1px solid #E0E0E0;
-  padding: 40px;
+  font-size: 1.1em;
   min-width: 250px;
-  box-shadow: 4px 4px #c2defd;
+  padding: 40px;
   background-color: white;
+  border: 1px solid #E0E0E0;
+  box-shadow: 4px 4px #c2defd;
 }
-label {
-  text-align: left;
+#form-itself {
+  animation: slideIn 1s;
 }
 input, textarea, select {
   font-family: 'Cabin', Helvetica, Arial, sans-serif;
   font-size: 1em;
   width: 100%;
-  background-color: #F5F5F5;
-  border: none;
   padding: 16px;
+  border: none;
+  background-color: #F5F5F5;
+}
+.new {
+  max-width: 600px;
+  margin: 0 auto;
+  padding-top: 90px;
 }
 /* Chrome/Opera/Safari */
 ::-webkit-input-placeholder {
@@ -170,35 +176,22 @@ input, textarea, select {
 :-moz-placeholder {
   color: #68b4ff;
 }
-.new-sugar {
-}
-.new {
-  max-width: 600px;
-  margin: 0 auto;
-  padding-top: 115px;
-}
-.name-box, {
-  text-align: left;
-}
-#form-itself {
-  animation: slideIn 1s;
-}
-.option-box, .button-container {
-  text-align: right;
-}
 #tax-box, #grat-box, #tax, #grat, .total-box {
   font-size: 1em;
   padding: 6px 0;
+}
+#total {
+  display: inline-block;
+  min-width: 56px;
+  color: #33FF99;
 }
 .total-box {
   text-align: right;
   font-size: 1.4em;
   padding: 18px 0;
 }
-#total {
-  display: inline-block;
-  min-width: 56px;
-  color: #33FF99;
+.option-box, .button-container {
+  text-align: right;
 }
 .button {
   font-weight: bold;
@@ -207,19 +200,17 @@ input, textarea, select {
   border: none;
   border-right: 4px solid #d52d81;
   border-radius: 3px;
+  color: snow;
   background-color: #f64da1;
   box-shadow: 3px 3px #B8B8B8;
-  color: snow;
 }
 .button:hover {
   background: #ff3399;
   box-shadow: none;
 }
-.new-btn button {
-  display: none;
-}
 @media screen and (max-width: 550px) {
   form {
+    padding: 30px;
     border: 0 solid #E0E0E0;
     box-shadow: none;
   }
@@ -229,8 +220,8 @@ input, textarea, select {
 }
 @keyframes slideIn {
   0% {
-      margin-left: 10%;
-      margin-right: 20%;
+    margin-left: 10%;
+    margin-right: 20%;
     }
   100% {
     margin-left: 0%;

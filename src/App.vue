@@ -49,6 +49,9 @@ a {
   text-decoration: none;
   color: snow;
 }
+ul {
+  list-style-type: none;
+}
 nav {
   position: fixed;
   top: 0;
@@ -76,7 +79,7 @@ nav {
   text-align: left;
   align-self: center;
 }
-.router-link-active, .logo-in-footer {
+.router-link-active, .logo-in-footer, .go-to-form button {
   font-family: 'Pacifico', cursive, sans-serif;
   font-size: 1.7em;
 }
@@ -110,7 +113,7 @@ footer {
 }
 /* MEDIA QUERIES */
 @media screen and (max-width: 550px) {
-  .router-link-active {
+  .router-link-active, .go-to-form button {
     font-size: 1.4rem;
   }
   /* HAMBURGER MENU */
@@ -125,8 +128,9 @@ footer {
   .line1, .line2, .line3 {
     width: 30px;
     height: 3px;
-    background-color: snow;
     margin: 6px 0;
+    border-radius: 4px;
+    background-color: snow;
     transition: 0.5s;
   }
   .change .line1 {

@@ -3,7 +3,7 @@
     <div class="loader" v-if="loader"><img src="/static/loading-cat.svg"/></div>
     <main id="list" class="list-div">
       <div class="item-container">
-        <router-link to="/new" class="new-btn"><button>New</button></router-link>
+        <router-link to="/new" class="go-to-form"><button>New</button></router-link>
         <div class="center">
           <div class="item row" v-for="(list, index) in lists" :key="index" :id="list.id" @click="test">
             <img class="img-list" v-bind:src="list.animal" v-bind:alt="list.animal"/>
@@ -64,14 +64,7 @@ export default {
 </script>
 
 <style scoped>
-a {
-text-decoration: none;
-}
-img.img-list {
-  width: 125px;
-  height: 125px;
-  animation: pop 1.2s;
-}
+/* LOADING SVG */
 .loader {
   margin-top: 80px;
 }
@@ -82,6 +75,14 @@ img.img-list {
   padding-top: 80px;
   min-height: 1000px;
 }
+.center {
+  animation: scale 1s;
+  animation-delay: 1.5s;
+}
+.go-to-form {
+  display: none;
+}
+/* SUGAR CARDS */
 main.list-div {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -89,23 +90,31 @@ main.list-div {
   display: flex;
   justify-content: center;
 }
+.img-list {
+  width: 125px;
+  height: 125px;
+  animation: pop 1.2s;
+}
+.item-container {
+  margin-top: 30px;
+  width: 100%;
+}
 .item {
   font-size: 20px;
   min-height: 150px;
   max-width: 700px;
   padding: 10px;
   margin: 0 auto;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   background-color: white;
-  box-shadow: 4px 4px lightgrey;
+  box-shadow: 2px 2px lightgrey;
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
   justify-content: space-between;
 }
-ul.info-ul {
-  list-style-type: none;
+.info-ul {
   padding: 5px 5px 5px 10px;
   margin: 0;
   text-align: left;
@@ -115,13 +124,7 @@ ul.info-ul {
   display: inline-block;
   min-width: 50%;
 }
-.item-container {
-  margin-top: 30px;
-  width: 100%;
-}
-.item.row:hover {
-  box-shadow: 1px 1px lightgrey;
-}
+/* DATA CLASSES */
 .name {
   font-size: 1.4em;
 }
@@ -131,6 +134,10 @@ ul.info-ul {
 .for {
   color: gray;
 }
+.status {
+  color: goldenrod;
+  align-self: flex-end;
+}
 .date {
   display: flex;
   flex-direction: column;
@@ -139,65 +146,53 @@ ul.info-ul {
 .date div {
   align-self: flex-end;
 }
-.status {
-  color: goldenrod;
-  align-self: flex-end;
-}
-.center {
-  animation: scale 1s;
-  animation-delay: 1.5s;
-}
 .row {
   opacity: 0;
   transform: scale(1);
   animation: fadeIn 1s forwards;
 }
-.new-btn {
-  position: fixed;
-  right: 30px;
-  bottom: 30px;
-  z-index: 9000;
-}
-button {
-  padding: 16px;
-  width: 100px;
-  height: 100px;
-  border: none;
-  border-right: 4px solid #d52d81;
-  background-color: #f64da1;
-  border-radius: 50%;
-  box-shadow: 1px 1px 5px #0D2945;
-  color: snow;
-}
-button:hover {
-  background: #ff3399;
-  box-shadow: none;
+.row:hover {
+  box-shadow: 1px 1px lightgrey;
 }
 @media screen and (max-width: 550px) {
-  button {
-    width: 80px;
-    height: 80px;
-  }
   .container {
     padding-top: 40px;
   }
-  img.img-list {
+  /* NEW SUGAR BUTTON */
+  .go-to-form {
+    display: inline-block;
+    position: fixed;
+    right: 30px;
+    bottom: 35px;
+    z-index: 1000;
+  }
+  button {
+    width: 80px;
+    height: 80px;
+    color: snow;
+    background-color: #f64da1;
+    border: none;
+    border-right: 4px solid #d52d81;
+    border-radius: 40%;
+    box-shadow: 1px 1px 5px #0D2945;
+  }
+  .img-list {
     width: 80px;
     height: 80px;
   }
   .item {
     font-size: 16px;
     min-height: 80px;
-    margin-bottom: 5px;
-    box-shadow: 2px 2px lightgrey;
+    margin-bottom: 4px;
   }
   .name {
-  font-weight: bold;
+    font-weight: bold;
   }
   .name, .total {
     font-size: 1.1em;
   }
 }
+/* KEYFRAMES ANIMATION */
 @keyframes fadeIn {
   0% {opacity: 0;}
   100% {opacity: 1;}
