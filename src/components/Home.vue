@@ -76,7 +76,7 @@ export default {
   min-height: 1000px;
 }
 .center {
-  animation: scale 1s;
+  animation: scale 0.9s;
   animation-delay: 1.5s;
 }
 .go-to-form {
@@ -93,7 +93,7 @@ main.list-div {
 .img-list {
   width: 125px;
   height: 125px;
-  animation: pop 1.2s;
+  animation: pop 0.7s;
 }
 .item-container {
   margin-top: 30px;
@@ -129,7 +129,7 @@ main.list-div {
   font-size: 1.4em;
 }
 .total {
-  color: green;
+  color: forestgreen;
 }
 .for {
   color: gray;
@@ -156,25 +156,28 @@ main.list-div {
 }
 @media screen and (max-width: 550px) {
   .container {
-    padding-top: 40px;
+    padding-top: 30px;
   }
   /* NEW SUGAR BUTTON */
   .go-to-form {
     display: inline-block;
     position: fixed;
-    right: 30px;
-    bottom: 35px;
+    right: 35px;
+    bottom: 40px;
     z-index: 1000;
+    opacity: 0;
+    animation: fadeIn 1.2s forwards;
+    animation-delay: 2s;
   }
   button {
-    width: 80px;
-    height: 80px;
+    width: 75px;
+    height: 70px;
     color: snow;
     background-color: #f64da1;
     border: none;
-    border-right: 4px solid #d52d81;
-    border-radius: 40%;
-    box-shadow: 1px 1px 5px #0D2945;
+    border-right: 3px solid #d52d81;
+    border-radius: 45%;
+    box-shadow: 1px 1px 7px #0D2945;
   }
   .img-list {
     width: 80px;

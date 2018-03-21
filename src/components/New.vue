@@ -145,7 +145,7 @@ form {
   box-shadow: 4px 4px #c2defd;
 }
 #form-itself {
-  animation: slideIn 1s;
+  animation: slideIn 1.2s;
 }
 input, textarea, select {
   font-family: 'Cabin', Helvetica, Arial, sans-serif;
@@ -158,7 +158,9 @@ input, textarea, select {
 .new {
   max-width: 600px;
   margin: 0 auto;
-  padding-top: 90px;
+  padding-top: 80px;
+  opacity: 0;
+  animation: fadeIn 0.8s forwards;
 }
 /* Chrome/Opera/Safari */
 ::-webkit-input-placeholder {
@@ -183,7 +185,7 @@ input, textarea, select {
 #total {
   display: inline-block;
   min-width: 56px;
-  color: #33FF99;
+  color: forestgreen;
 }
 .total-box {
   text-align: right;
@@ -202,7 +204,7 @@ input, textarea, select {
   border-radius: 3px;
   color: snow;
   background-color: #f64da1;
-  box-shadow: 3px 3px #B8B8B8;
+  box-shadow: 2px 2px #B8B8B8;
 }
 .button:hover {
   background: #ff3399;
@@ -210,7 +212,7 @@ input, textarea, select {
 }
 @media screen and (max-width: 550px) {
   form {
-    padding: 30px;
+    padding: 30px 25px;
     border: 0 solid #E0E0E0;
     box-shadow: none;
   }
@@ -220,12 +222,16 @@ input, textarea, select {
 }
 @keyframes slideIn {
   0% {
-    margin-left: 10%;
-    margin-right: 20%;
+    margin-left: 15%;
+    margin-right: 15%;
     }
   100% {
     margin-left: 0%;
     margin-right: 0%;
   }
+}
+@keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
 }
 </style>
