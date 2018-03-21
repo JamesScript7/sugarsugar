@@ -3,7 +3,6 @@
     <div class="loader" v-if="loader"><img src="/static/loading-cat.svg"/></div>
     <main id="list" class="list-div">
       <div class="item-container">
-        <router-link to="/new" class="new-btn"><button>New</button></router-link>
         <div class="center">
           <div class="item row" v-for="(list, index) in lists" :key="index" :id="list.id" @click="test">
             <img class="img-list" v-bind:src="list.animal" v-bind:alt="list.animal"/>
@@ -80,7 +79,7 @@ img.img-list {
 }
 .container {
   padding-top: 80px;
-  min-height: 1000px;
+  min-height: 900px;
 }
 main.list-div {
   display: -webkit-box;
@@ -120,10 +119,10 @@ ul.info-ul {
   width: 100%;
 }
 .item.row:hover {
-  box-shadow: 1px 1px lightgrey;
+  box-shadow: 2px 2px lightgrey;
 }
 .name {
-  font-size: 1.4em;
+  font-size: 1.5em;
 }
 .total {
   color: green;
@@ -144,7 +143,7 @@ ul.info-ul {
   align-self: flex-end;
 }
 .center {
-  animation: scale 1s;
+  animation: scale 1.5s;
   animation-delay: 1.5s;
 }
 .row {
@@ -152,34 +151,36 @@ ul.info-ul {
   transform: scale(1);
   animation: fadeIn 1s forwards;
 }
-.new-btn {
-  position: fixed;
-  right: 30px;
-  bottom: 30px;
-  z-index: 9000;
+.row:nth-child(1) {
+  animation-delay: 0.1s;
 }
-button {
-  padding: 16px;
-  width: 100px;
-  height: 100px;
-  border: none;
-  border-right: 4px solid #d52d81;
-  background-color: #f64da1;
-  border-radius: 50%;
-  box-shadow: 1px 1px 5px #0D2945;
-  color: snow;
+.row:nth-child(2) {
+  animation-delay: 0.3s;
 }
-button:hover {
-  background: #ff3399;
-  box-shadow: none;
+.row:nth-child(3) {
+  animation-delay: 0.5s;
+}
+.row:nth-child(4) {
+  animation-delay: 0.7s;
+}
+.row:nth-child(5) {
+  animation-delay: 0.9s;
+}
+.row:nth-child(6) {
+  animation-delay: 1.1s;
+}
+.row:nth-child(7) {
+  animation-delay: 1.3s;
+}
+.row:nth-child(8) {
+  animation-delay: 1.5s;
+}
+.row:nth-child(9) {
+  animation-delay: 1.7s;
 }
 @media screen and (max-width: 550px) {
-  button {
-    width: 80px;
-    height: 80px;
-  }
   .container {
-    padding-top: 40px;
+    padding-top: 50px;
   }
   img.img-list {
     width: 80px;
@@ -188,11 +189,11 @@ button:hover {
   .item {
     font-size: 16px;
     min-height: 80px;
-    margin-bottom: 5px;
-    box-shadow: 2px 2px lightgrey;
+    margin-bottom: 6px;
+    box-shadow: 2px 2px #c2defd;
   }
   .name {
-  font-weight: bold;
+    font-weight: bold;
   }
   .name, .total {
     font-size: 1.1em;

@@ -1,6 +1,6 @@
 <template>
   <div class="new">
-    <form id="form-itself" @submit="saveData" action="index.html" autocomplete="off">
+    <form id="form-itself" @submit.prevent="saveData" action="index.html" autocomplete="off">
       <div class="new-sugar">
         <img v-bind:src="this.svg" v-bind:alt="this.svg"/>
         <div>
@@ -50,6 +50,7 @@
 
 <script>
 import db from './firebaseInit'
+import router from '@/router'
 export default {
   name: 'New',
   data () {
@@ -104,6 +105,7 @@ export default {
       if (this.totalView !== '' && this.totalView > 0) {
         console.log(data)
         db.ref(this.date).set(data)
+        router.push('/')
       } else {
         this.totalView = 'Please Enter an Amount!'
       }
@@ -212,6 +214,9 @@ input, textarea, select {
 .button:hover {
   background: #ff3399;
   box-shadow: none;
+}
+.new-btn button {
+  display: none;
 }
 @media screen and (max-width: 550px) {
   form {
