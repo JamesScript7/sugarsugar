@@ -2,20 +2,19 @@
   <div class="new">
     <form id="form-itself" @submit.prevent="saveData" action="index.html" autocomplete="off">
       <div class="new-sugar">
-        <img v-bind:src="this.svg" v-bind:alt="this.svg"/>
+        <div class="img-box">
+          <img v-bind:src="this.svg" v-bind:alt="this.svg"/>
+        </div>
         <div>
           <h1>New Sugar</h1>
         </div>
       </div>
-      <br>
       <div>
         <input id="name" type="text" name="name" placeholder="Name*" v-model="name" required />
       </div>
-      <br>
       <div class="amount-box">
         <input id="amount" type="number" name="amount" placeholder="Amount*" v-model="amount" required />
       </div>
-      <br>
       <div class="reason-box">
         <textarea id="reason" type="text" name="reason" placeholder="For..." v-model="reason"></textarea>
       </div>
@@ -147,6 +146,9 @@ form {
 #form-itself {
   animation: slideIn 1.2s;
 }
+input, textarea {
+  margin-bottom: 18px;
+}
 input, textarea, select {
   font-family: 'Cabin', Helvetica, Arial, sans-serif;
   font-size: 1em;
@@ -155,10 +157,13 @@ input, textarea, select {
   border: none;
   background-color: #F5F5F5;
 }
+.img-box {
+  height: 128px;
+}
 .new {
   max-width: 600px;
   margin: 0 auto;
-  padding-top: 80px;
+  padding-top: 110px;
   opacity: 0;
   animation: fadeIn 0.8s forwards;
 }
@@ -216,8 +221,14 @@ input, textarea, select {
     border: 0 solid #E0E0E0;
     box-shadow: none;
   }
+  input, textarea {
+    margin-bottom: 10px;
+  }
   input, textarea, select {
     padding: 12px;
+  }
+  .new {
+    padding-top: 70px;
   }
 }
 @keyframes slideIn {

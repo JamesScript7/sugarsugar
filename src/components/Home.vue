@@ -72,7 +72,7 @@ export default {
   width: 125px;
 }
 .container {
-  padding-top: 80px;
+  padding-top: 70px;
   min-height: 1000px;
 }
 .center {
