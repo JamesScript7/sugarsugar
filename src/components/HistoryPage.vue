@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import db from './firebaseInit'
+import db from '@/components/firebase/firebaseInit'
 export default {
   name: 'Home',
   data () {

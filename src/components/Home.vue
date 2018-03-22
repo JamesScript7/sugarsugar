@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import db from './firebaseInit'
+import db from '@/components/firebase/firebaseInit'
 export default {
   name: 'Home',
   data () {
@@ -163,7 +163,7 @@ main.list-div {
     display: inline-block;
     position: fixed;
     right: 35px;
-    bottom: 40px;
+    bottom: 50px;
     z-index: 1000;
     opacity: 0;
     animation: fadeIn 1.2s forwards;
