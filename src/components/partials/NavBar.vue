@@ -16,6 +16,9 @@
           <!-- <li><router-link to="/">Logout</router-link></li> -->
         </ul>
     </div>
+    <div>
+      <router-link to="/new" id="new-btn" class="go-to-form"><button id="new-btn-btn">New</button></router-link>
+    </div>
   </nav>
 </template>
 
@@ -74,6 +77,10 @@ export default {
   font-family: 'Pacifico', cursive, sans-serif;
   font-size: 1.7em;
 }
+/* NEW SUGAR BUTTON */
+.go-to-form {
+  display: none;
+}
 /* MEDIA QUERIES */
 @media screen and (max-width: 550px) {
   #navBar {
@@ -108,8 +115,27 @@ export default {
     font-weight: bold;
     color: #d52d81;
   }
-  .go-to-form button {
-    font-size: 1.3rem;
+  /* NEW SUGAR BUTTON */
+  .go-to-form {
+    display: none;
+    position: fixed;
+    right: 35px;
+    bottom: 50px;
+    z-index: 1000;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+  }
+  button {
+    font-family: 'Pacifico', cursive, sans-serif;
+    font-size: 1.3em;
+    width: 75px;
+    height: 70px;
+    color: snow;
+    background-color: #f64da1;
+    border: none;
+    border-right: 3px solid #d52d81;
+    border-radius: 45%;
+    box-shadow: 1px 1px 7px #0D2945;
   }
   .logo-on-top {
     font-size: 1.2em;
@@ -142,5 +168,14 @@ export default {
     -webkit-transform: rotate(45deg) translate(-8px, -8px);
     transform: rotate(45deg) translate(-7px, -8px);
   }
+}
+/* KEYFRAMES ANIMATION */
+@keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+@keyframes fadeOut {
+  0% {opacity: 1;}
+  100% {opacity: 0;}
 }
 </style>

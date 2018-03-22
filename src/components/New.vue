@@ -1,6 +1,6 @@
 <template>
   <div class="new">
-    <form id="form-itself" @submit.prevent="saveData" action="index.html" autocomplete="off">
+    <form id="form-itself" @submit.prevent="saveData" autocomplete="off">
       <div class="new-sugar">
         <div class="img-box">
           <img v-bind:src="this.svg" v-bind:alt="this.svg"/>

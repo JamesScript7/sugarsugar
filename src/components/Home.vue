@@ -3,10 +3,11 @@
     <div class="loader" v-if="loader"><img src="/static/loading-cat.svg"/></div>
     <main id="list" class="list-div">
       <div class="item-container">
-        <router-link to="/new" class="go-to-form"><button>New</button></router-link>
         <div class="center">
           <div class="item row" v-for="(list, index) in lists" :key="index" :id="list.id" @click="test">
-            <img class="img-list" v-bind:src="list.animal" v-bind:alt="list.animal"/>
+            <div class="img-list-holder">
+              <img class="img-list" v-bind:src="list.animal" v-bind:alt="list.animal"/>
+            </div>
             <div class="info-box">
               <ul class="info-ul">
                 <li class="name">{{list.name}}</li>
@@ -103,11 +104,11 @@ main.list-div {
   font-size: 20px;
   min-height: 150px;
   max-width: 700px;
-  padding: 10px;
+  padding: 4px 10px;
   margin: 0 auto;
-  margin-bottom: 12px;
+  margin-bottom: 6px;
   background-color: white;
-  box-shadow: 2px 2px lightgrey;
+  box-shadow: 1px 1px lightgrey;
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
@@ -123,6 +124,7 @@ main.list-div {
 .info-box {
   display: inline-block;
   min-width: 50%;
+  max-width: 50%;
 }
 /* DATA CLASSES */
 .name {
@@ -152,41 +154,20 @@ main.list-div {
   animation: fadeIn 1s forwards;
 }
 .row:hover {
-  box-shadow: 1px 1px lightgrey;
+  box-shadow: 1px 1px snow;
 }
 @media screen and (max-width: 550px) {
   .container {
     padding-top: 30px;
   }
-  /* NEW SUGAR BUTTON */
-  .go-to-form {
-    display: inline-block;
-    position: fixed;
-    right: 35px;
-    bottom: 50px;
-    z-index: 1000;
-    opacity: 0;
-    animation: fadeIn 1.2s forwards;
-    animation-delay: 2s;
-  }
-  button {
-    width: 75px;
-    height: 70px;
-    color: snow;
-    background-color: #f64da1;
-    border: none;
-    border-right: 3px solid #d52d81;
-    border-radius: 45%;
-    box-shadow: 1px 1px 7px #0D2945;
-  }
-  .img-list {
-    width: 80px;
-    height: 80px;
+  .img-list, .img-list-holder {
+    width: 60px;
+    height: 60px;
   }
   .item {
     font-size: 16px;
     min-height: 80px;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
   }
   .name {
     font-weight: bold;

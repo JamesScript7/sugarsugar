@@ -29,6 +29,9 @@ footer {
   list-style-type: none;
   padding: 0;
 }
+.logo-in-footer {
+  font-family: 'Pacifico', cursive, sans-serif;
+}
 .footer-ul .logo-in-footer {
   font-size: 1.8em;
 }
