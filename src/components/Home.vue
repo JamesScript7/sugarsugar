@@ -3,6 +3,9 @@
     <div class="loader" v-if="loader"><img src="/static/loading-cat.svg"/></div>
     <main id="list" class="list-div">
       <div class="item-container">
+        <div>
+          <router-link to="/new" id="new-btn" class="go-to-form"><button id="new-btn-btn">New</button></router-link>
+        </div>
         <div class="center">
           <div class="item row" v-for="(list, index) in lists" :key="index" :id="list.id" @click="test">
             <div class="img-list-holder">
@@ -156,6 +159,10 @@ main.list-div {
 .row:hover {
   box-shadow: 1px 1px snow;
 }
+/* NEW SUGAR BUTTON */
+.go-to-form {
+  display: none;
+}
 @media screen and (max-width: 550px) {
   .container {
     padding-top: 30px;
@@ -174,6 +181,29 @@ main.list-div {
   }
   .name, .total {
     font-size: 1.1em;
+  }
+  /* NEW SUGAR BUTTON */
+  .go-to-form {
+    display: inline-block;
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    z-index: 1;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+    animation-delay: 1.7s;
+  }
+  button {
+    font-family: 'Pacifico', cursive, sans-serif;
+    font-size: 1.2em;
+    width: 65px;
+    height: 60px;
+    color: snow;
+    background-color: #f64da1;
+    border: none;
+    border-radius: 45%;
+    border-right: 3px solid #d52d81;
+    box-shadow: 1px 1px 7px #0D2945;
   }
 }
 /* KEYFRAMES ANIMATION */

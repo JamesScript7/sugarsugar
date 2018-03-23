@@ -16,9 +16,6 @@
           <!-- <li><router-link to="/">Logout</router-link></li> -->
         </ul>
     </div>
-    <div>
-      <router-link to="/new" id="new-btn" class="go-to-form"><button id="new-btn-btn">New</button></router-link>
-    </div>
   </nav>
 </template>
 
@@ -52,7 +49,6 @@ export default {
     }
   }
 }
-
 </script>
 
 <style scoped>
@@ -64,8 +60,23 @@ export default {
   background-color: #2c86e0;
   border-bottom: 1px solid #2871bb;
 }
+/* SIDE NAVIGATION AREA */
 #sideNav.hide {
   display: inline-block;
+}
+#side-nav {
+  font-size: 20px;
+  padding-top: 10px;
+}
+#side-nav li {
+  display: inline-block;
+  padding: 0 6px;
+}
+#side-nav li a {
+  padding: 4px 0;
+}
+ul li .router-link-exact-active {
+  border-bottom: 2px solid snow;
 }
 /* LOGOS */
 .logo-on-top {
@@ -73,12 +84,11 @@ export default {
   text-align: left;
   align-self: center;
 }
-.logo-on-top, .logo-in-footer, .go-to-form button {
+.logo-on-top, .logo-in-footer {
   font-family: 'Pacifico', cursive, sans-serif;
   font-size: 1.7em;
 }
-/* NEW SUGAR BUTTON */
-.go-to-form {
+.hamburger {
   display: none;
 }
 /* MEDIA QUERIES */
@@ -115,28 +125,6 @@ export default {
     font-weight: bold;
     color: #d52d81;
   }
-  /* NEW SUGAR BUTTON */
-  .go-to-form {
-    display: none;
-    position: fixed;
-    right: 35px;
-    bottom: 50px;
-    z-index: 1000;
-    opacity: 0;
-    animation: fadeIn 1s forwards;
-  }
-  button {
-    font-family: 'Pacifico', cursive, sans-serif;
-    font-size: 1.3em;
-    width: 75px;
-    height: 70px;
-    color: snow;
-    background-color: #f64da1;
-    border: none;
-    border-right: 3px solid #d52d81;
-    border-radius: 45%;
-    box-shadow: 1px 1px 7px #0D2945;
-  }
   .logo-on-top {
     font-size: 1.2em;
   }
@@ -168,14 +156,5 @@ export default {
     -webkit-transform: rotate(45deg) translate(-8px, -8px);
     transform: rotate(45deg) translate(-7px, -8px);
   }
-}
-/* KEYFRAMES ANIMATION */
-@keyframes fadeIn {
-  0% {opacity: 0;}
-  100% {opacity: 1;}
-}
-@keyframes fadeOut {
-  0% {opacity: 1;}
-  100% {opacity: 0;}
 }
 </style>
