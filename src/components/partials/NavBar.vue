@@ -4,17 +4,17 @@
       <router-link :to="{ name: 'Home' }">SugarSugar</router-link>
     </div>
     <div class="new-btn">
-        <div v-on:click="menu" class="hamburger">
-          <div v-bind:class="line1"></div>
-          <div v-bind:class="line2"></div>
-          <div v-bind:class="line3"></div>
-        </div>
-        <ul id="side-nav" v-bind:class="sideNav">
-          <li v-on:click="menu"><router-link to="/">Home</router-link></li>
-          <li v-on:click="menu"><router-link to="/new">New</router-link></li>
-          <li v-on:click="menu"><router-link to="/history">History</router-link></li>
-          <!-- <li><router-link to="/">Logout</router-link></li> -->
-        </ul>
+      <div v-on:click="menu" class="hamburger">
+        <div v-bind:class="line1"></div>
+        <div v-bind:class="line2"></div>
+        <div v-bind:class="line3"></div>
+      </div>
+      <ul id="side-nav" v-bind:class="sideNav">
+        <li v-on:click="menu"><router-link to="/">Home</router-link></li>
+        <li v-on:click="menu"><router-link to="/new">New</router-link></li>
+        <li v-on:click="menu"><router-link to="/history">History</router-link></li>
+        <!-- <li><router-link to="/">Logout</router-link></li> -->
+      </ul>
     </div>
   </nav>
 </template>
