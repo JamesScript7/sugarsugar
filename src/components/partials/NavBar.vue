@@ -13,6 +13,8 @@
         <li v-on:click="menu"><router-link to="/">Home</router-link></li>
         <li v-on:click="menu"><router-link to="/new">New</router-link></li>
         <li v-on:click="menu"><router-link to="/history">History</router-link></li>
+        <li v-on:click="menu"><router-link to="/login">Login</router-link></li>
+        <li v-on:click="menu"><router-link to="/signup">Sign Up</router-link></li>
         <!-- <li><router-link to="/">Logout</router-link></li> -->
       </ul>
     </div>
@@ -97,12 +99,15 @@ ul li .router-link-exact-active {
     padding: 5px 16px 1px 16px;
     z-index: 9000;
   }
+  ul li .router-link-exact-active {
+    border-bottom: 3px solid #d52d81;
+  }
   #side-nav {
     font-size: 1.2em;
     line-height: 2;
     position: fixed;
     width: 150px;
-    height: 100%;
+    height: 120%;
     top: 0;
     margin: 0;
     padding: 50px 16px 0 20px;
@@ -111,6 +116,7 @@ ul li .router-link-exact-active {
     z-index: -1;
   }
   #side-nav li {
+    display: block;
     padding: 0 5px;
   }
   .hide {

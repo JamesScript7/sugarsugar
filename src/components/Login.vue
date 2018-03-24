@@ -1,0 +1,105 @@
+<template>
+  <div class="log-in">
+    <form @submit.prevent="loginForm">
+      <h1>Login</h1>
+      <input type="text" v-model="email" placeholder="Email">
+      <input type="password" v-model="password" placeholder="Password">
+      <input class="button" type="submit" value="Login">
+      <p>Don't have an account? Sign up <router-link class="here" to="/signup">here</router-link></p>
+    </form>
+  </div>
+</template>
+
+<script>
+import router from '@/router'
+export default {
+  name: 'Login',
+  data: function () {
+    return {
+      email: '',
+      password: ''
+    }
+  },
+  methods: {
+    loginForm: function () {
+      // console.log(this.email, this.password)
+      // FIREBASE AUTHENTICATION.
+      router.push('/')
+    }
+  }
+}
+</script>
+
+<style scoped>
+@import "../styles/animation.css";
+h1 {
+  display: inline-block;
+  margin-bottom: 60px;
+  background-color: #0059B2;
+  padding: 4px 18px;
+  color: snow;
+}
+form {
+  font-size: 1.1em;
+  min-width: 250px;
+  padding: 60px;
+  background-color: white;
+  border: 1px solid #E0E0E0;
+  box-shadow: 4px 4px #c2defd;
+  animation: slideIn 1.2s;
+}
+input {
+  font-family: 'Cabin', Helvetica, Arial, sans-serif;
+  display: block;
+  font-size: 1em;
+  width: 300px;
+  margin: 0 auto;
+  margin-bottom: 18px;
+  border: none;
+  background-color: #F5F5F5;
+  padding: 16px;
+}
+.log-in {
+  max-width: 600px;
+  margin: 0 auto;
+  padding-top: 150px;
+  height: 800px;
+  height: 100vh;
+  opacity: 0;
+  animation: fadeIn 0.8s forwards;
+}
+.button {
+  font-weight: bold;
+  font-size: 1.2em;
+  padding: 14px;
+  border: none;
+  border-right: 4px solid #d52d81;
+  border-radius: 3px;
+  color: snow;
+  background-color: #f64da1;
+  box-shadow: 2px 2px #B8B8B8;
+}
+/* SIGN UP REDIRECT */
+p {
+  color: gray;
+  white-space: nowrap;
+}
+.here {
+  color: #d52d81;
+}
+@media screen and (max-width: 550px) {
+  form {
+    padding: 40px 25px;
+    border: 0 solid #E0E0E0;
+    box-shadow: none;
+  }
+  input {
+    margin-bottom: 20px;
+    padding: 12px;
+    width: 85%;
+  }
+  .log-in {
+    padding-top: 100px;
+  }
+}
+</style>

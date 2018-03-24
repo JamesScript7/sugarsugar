@@ -101,7 +101,6 @@ export default {
         status: this.status
       }
       if (this.totalView !== '' && this.totalView > 0) {
-        console.log(data)
         db.ref(this.date).set(data)
         router.push('/')
       } else {

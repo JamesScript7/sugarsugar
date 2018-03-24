@@ -4,6 +4,9 @@ import Router from 'vue-router'
 import Home from '@/components/Home'
 import New from '@/components/New'
 import HistoryPage from '@/components/HistoryPage'
+import Login from '@/components/Login'
+import SignUp from '@/components/SignUp'
+
 Vue.use(Router)
 export default new Router({
   routes: [
@@ -21,6 +24,16 @@ export default new Router({
       path: '/history',
       name: 'History',
       component: HistoryPage
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
+    },
+    {
+      path: '/signup',
+      name: 'SignUp',
+      component: SignUp
     }
   ],
   scrollBehavior () {

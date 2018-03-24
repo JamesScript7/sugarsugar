@@ -53,4 +53,18 @@ nav {
   text-align: center;
   color: #2c3e50;
 }
+@keyframes slideIn {
+  0% {
+    margin-left: 15%;
+    margin-right: 15%;
+  }
+  100% {
+    margin-left: 0%;
+    margin-right: 0%;
+  }
+}
+@keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
 </style>
