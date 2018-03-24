@@ -4,8 +4,8 @@
       <p class="welcome">Welcome to SugarSugar</p>
       <h1>Sign up!</h1>
       <input type="text" v-bind:class="this.message" v-model="email" placeholder="Email">
-      <input type="password" v-bind:class="this.passwordStatus" v-model="password1" placeholder="Password">
-      <input type="password" v-bind:class="this.passwordStatus" v-model="password2" placeholder="Retype Password">
+      <input type="password" v-bind:class="this.passwordStatus" v-model="password1" maxlength="16" placeholder="Password (at least 7 characters)">
+      <input type="password" v-bind:class="this.passwordStatus" v-model="password2" maxlength="16" placeholder="Retype Password">
       <div class="message-container">
         <p class="message">{{this.passwordMessage}}</p>
       </div>
@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import firebase from 'firebase'
 import router from '@/router'
 export default {
   name: 'SignUp',
@@ -22,6 +23,7 @@ export default {
     return {
       email: null,
       isEmail: false,
+      isPassword: false,
       message: null,
       password1: null,
       password2: null,
@@ -65,21 +67,40 @@ export default {
   },
   methods: {
     signUpForm: function () {
-      let re = /.+@.+\..+/i
+      let emailReg = /.+@.+\..+/i
+      let passReg = /^[a-zA-Z0-9)(]{7,16}$/
       this.attempt = true
-      if (re.test(this.email) && (this.password1 === this.password2)) {
-        router.push('/')
-        this.isEmail = true
-      } else if (!re.test(this.email)) {
-        this.isEmail = false
-        this.message = 'message-bad'
-      } else if (this.password1 !== this.password2) {
-        this.passwordStatus = 'message-bad'
-        this.passwordMessage = 'Passwords do not match!'
-      } else {
-        if (!this.isEmail) {
-          this.message = 'message-bad'
+      emailReg.test(this.email) ? this.isEmail = true : this.isEmail = false
+      if (passReg.test(this.password1) && passReg.test(this.password1)) {
+        if (this.password1 === this.password2) {
+          if (this.password1.length < 7 || this.password1.length > 16 || this.password1 === '' || this.password1 === null) {
+            this.isPassword = false
+            this.passwordStatus = 'message-bad'
+          } else if (this.password2.length < 7 || this.password2.length > 16 || this.password2 === '' || this.password2 === null) {
+            this.isPassword = false
+            this.passwordStatus = 'message-bad'
+          } else {
+            this.isPassword = true
+          }
+        } else {
+          this.isPassword = false
         }
+      } else {
+        this.isPassword = false
+      }
+      if (this.isEmail && this.isPassword) {
+        // DB CALL
+        firebase.auth().createUserWithEmailAndPassword(this.email, this.password2).then(
+          function (user) { console.log('USER CREATED:', user) }, function (err) { console.log('ERROR', err.message) }
+        )
+        // router.push('/')
+      } else if (!this.isEmail) {
+        console.log('WRONG EMAIL')
+        this.message = 'message-bad'
+      } else if (!this.isPassword) {
+        console.log('NO MATCH!')
+        this.passwordStatus = 'message-bad'
+        this.passwordMessage = 'Please recheck your password!'
       }
     }
   }
@@ -88,6 +109,7 @@ export default {
 
 <style scoped>
 @import "../styles/animation.css";
+@import "../styles/form-color.css";
 h1 {
   display: inline-block;
   margin-bottom: 50px;
@@ -140,6 +162,7 @@ input {
 }
 .sign-up {
   max-width: 600px;
+  min-height: 100%;
   margin: 0 auto;
   padding-top: 150px;
   height: 800px;
@@ -172,6 +195,7 @@ input {
   .welcome {
     font-family: 'Pacifico', cursive, sans-serif;
     font-size: 1.4em;
+    margin: 0;
   }
   .sign-up {
     padding-top: 70px;

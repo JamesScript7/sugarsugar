@@ -9,12 +9,11 @@
         <div v-bind:class="line2"></div>
         <div v-bind:class="line3"></div>
       </div>
-      <ul id="side-nav" v-bind:class="sideNav">
-        <li v-on:click="menu"><router-link to="/">Home</router-link></li>
-        <li v-on:click="menu"><router-link to="/new">New</router-link></li>
-        <li v-on:click="menu"><router-link to="/history">History</router-link></li>
-        <li v-on:click="menu"><router-link to="/login">Login</router-link></li>
-        <li v-on:click="menu"><router-link to="/signup">Sign Up</router-link></li>
+      <ul v-on:click="menu" id="side-nav" v-bind:class="sideNav">
+        <li><router-link to="/">Home</router-link></li>
+        <li><router-link to="/new">New</router-link></li>
+        <li><router-link to="/history">History</router-link></li>
+        <li><router-link to="/login">Login</router-link></li>
         <!-- <li><router-link to="/">Logout</router-link></li> -->
       </ul>
     </div>

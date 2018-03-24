@@ -60,7 +60,7 @@ export default {
       gratuity: 0.00,
       total: 0.00,
       date: null,
-      status: 'none',
+      status: 'waiting',
       taxView: 0.00,
       gratuityView: 0.00,
       totalView: 0.00,
@@ -127,6 +127,7 @@ export default {
 </script>
 
 <style scoped>
+@import "../styles/form-color.css";
 h1 {
   display: inline-block;
   background-color: #0059B2;
@@ -160,26 +161,11 @@ input, textarea, select {
 }
 .new {
   max-width: 600px;
+  min-height: 100%;
   margin: 0 auto;
   padding-top: 110px;
   opacity: 0;
   animation: fadeIn 0.8s forwards;
-}
-/* Chrome/Opera/Safari */
-::-webkit-input-placeholder {
-  color: #68b4ff;
-}
-/* Firefox 19+ */
-::-moz-placeholder {
-  color: #68b4ff;
-}
-/* IE 10+ */
-:-ms-input-placeholder {
-  color: #68b4ff;
-}
-/* Firefox 18- */
-:-moz-placeholder {
-  color: #68b4ff;
 }
 #tax-box, #grat-box, #tax, #grat, .total-box {
   font-size: 1em;

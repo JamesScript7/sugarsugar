@@ -34,6 +34,10 @@ export default new Router({
       path: '/signup',
       name: 'SignUp',
       component: SignUp
+    },
+    {
+      path: '*',
+      redirect: '/login'
     }
   ],
   scrollBehavior () {

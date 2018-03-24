@@ -1,0 +1,16 @@
+/* Chrome/Opera/Safari */
+::-webkit-input-placeholder {
+  color: #68b4ff;
+}
+/* Firefox 19+ */
+::-moz-placeholder {
+  color: #68b4ff;
+}
+/* IE 10+ */
+:-ms-input-placeholder {
+  color: #68b4ff;
+}
+/* Firefox 18- */
+:-moz-placeholder {
+  color: #68b4ff;
+}

@@ -32,6 +32,7 @@ export default {
 
 <style scoped>
 @import "../styles/animation.css";
+@import "../styles/form-color.css";
 h1 {
   display: inline-block;
   margin-bottom: 60px;
@@ -99,7 +100,7 @@ p {
     width: 85%;
   }
   .log-in {
-    padding-top: 100px;
+    padding-top: 70px;
   }
 }
 </style>
