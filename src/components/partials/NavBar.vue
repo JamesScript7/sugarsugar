@@ -14,13 +14,14 @@
         <li><router-link to="/new">New</router-link></li>
         <li><router-link to="/history">History</router-link></li>
         <li><router-link to="/login">Login</router-link></li>
-        <!-- <li><router-link to="/">Logout</router-link></li> -->
+        <li v-on:click="logout">Logout</li>
       </ul>
     </div>
   </nav>
 </template>
 
 <script>
+import firebase from 'firebase'
 export default {
   name: 'NavBar',
   data () {
@@ -47,6 +48,12 @@ export default {
         this.sideNav = 'hide'
         this.hamburger = true
       }
+    },
+    logout: function () {
+      let self = this
+      firebase.auth().signOut().then(function () {
+        self.$router.replace('login')
+      })
     }
   }
 }

@@ -1,9 +1,10 @@
 <template>
   <div class="log-in">
     <form @submit.prevent="loginForm">
+      <p class="welcome">Welcome to SugarSugar</p>
       <h1>Login</h1>
-      <input type="text" v-model="email" placeholder="Email">
-      <input type="password" v-model="password" placeholder="Password">
+      <input type="text" v-model="email" placeholder="Email" required>
+      <input type="password" v-model="password" placeholder="Password" required>
       <input class="button" type="submit" value="Login">
       <p>Don't have an account? Sign up <router-link class="here" to="/signup">here</router-link></p>
     </form>
@@ -11,7 +12,8 @@
 </template>
 
 <script>
-import router from '@/router'
+// import router from '@/router'
+import firebase from 'firebase'
 export default {
   name: 'Login',
   data: function () {
@@ -22,9 +24,16 @@ export default {
   },
   methods: {
     loginForm: function () {
-      // console.log(this.email, this.password)
-      // FIREBASE AUTHENTICATION.
-      router.push('/')
+      // FIREBASE AUTHENTICATION
+      firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
+        (user) => {
+          console.log('SIGNED IN: ', user)
+          this.$router.replace('home')
+        },
+        (err) => {
+          alert('Please try again')
+        }
+      )
     }
   }
 }
@@ -58,6 +67,11 @@ input {
   border: none;
   background-color: #F5F5F5;
   padding: 16px;
+}
+.welcome {
+  font-family: 'Pacifico', cursive, sans-serif;
+  font-size: 2em;
+  white-space: nowrap;
 }
 .log-in {
   max-width: 600px;
@@ -97,6 +111,11 @@ p {
     margin-bottom: 20px;
     padding: 12px;
     width: 85%;
+  }
+  .welcome {
+    font-family: 'Pacifico', cursive, sans-serif;
+    font-size: 1.4em;
+    margin: 0;
   }
   .log-in {
     padding-top: 70px;

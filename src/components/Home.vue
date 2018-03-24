@@ -68,6 +68,7 @@ export default {
 </script>
 
 <style scoped>
+@import "../styles/loader.css";
 .container {
   padding-top: 70px;
   min-height: 1000px;
@@ -78,13 +79,6 @@ export default {
 }
 .go-to-form {
   display: none;
-}
-/* LOADING CAT SVG */
-.loader {
-  margin-top: 80px;
-}
-.loader img {
-  width: 125px;
 }
 /* SUGAR CARDS */
 main.list-div {

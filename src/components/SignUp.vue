@@ -1,11 +1,11 @@
 <template>
   <div class="sign-up">
-    <form @submit.prevent="signUpForm">
-      <p class="welcome">Welcome to SugarSugar</p>
+    <div class="loader" v-if="loader"><img src="/static/loading-cat.svg"/></div>
+    <form v-bind:class="this.form" @submit.prevent="signUpForm">
       <h1>Sign up!</h1>
-      <input type="text" v-bind:class="this.message" v-model="email" placeholder="Email">
-      <input type="password" v-bind:class="this.passwordStatus" v-model="password1" maxlength="16" placeholder="Password (at least 7 characters)">
-      <input type="password" v-bind:class="this.passwordStatus" v-model="password2" maxlength="16" placeholder="Retype Password">
+      <input type="text" v-bind:class="this.message" v-model="email" placeholder="Email" required>
+      <input type="password" v-bind:class="this.passwordStatus" v-model="password1" maxlength="16" placeholder="Password (at least 7 characters)" required>
+      <input type="password" v-bind:class="this.passwordStatus" v-model="password2" maxlength="16" placeholder="Retype Password" required>
       <div class="message-container">
         <p class="message">{{this.passwordMessage}}</p>
       </div>
@@ -21,15 +21,17 @@ export default {
   name: 'SignUp',
   data: function () {
     return {
+      loader: false,
+      form: null,
       email: null,
       isEmail: false,
-      isPassword: false,
       message: null,
       password1: null,
       password2: null,
+      isPassword: false,
       passwordMessage: null,
-      attempt: false,
-      passwordStatus: null
+      passwordStatus: null,
+      attempt: false
     }
   },
   watch: {
@@ -89,16 +91,25 @@ export default {
         this.isPassword = false
       }
       if (this.isEmail && this.isPassword) {
-        // DB CALL
+        this.loader = true
+        this.form = 'hide'
+        // FIREBASE (use arrow functions to access this)
         firebase.auth().createUserWithEmailAndPassword(this.email, this.password2).then(
-          function (user) { console.log('USER CREATED:', user) }, function (err) { console.log('ERROR', err.message) }
+          (user) => {
+            console.log('USER CREATED:', user)
+            this.$router.replace('home')
+          },
+          (err) => {
+            this.form = null
+            alert('ERROR', err.message)
+          }
         )
         // router.push('/')
       } else if (!this.isEmail) {
-        console.log('WRONG EMAIL')
+        // console.log('INVALID EMAIL')
         this.message = 'message-bad'
       } else if (!this.isPassword) {
-        console.log('NO MATCH!')
+        // console.log('PASSWORDS DO NOT MATCH')
         this.passwordStatus = 'message-bad'
         this.passwordMessage = 'Please recheck your password!'
       }
@@ -109,12 +120,16 @@ export default {
 
 <style scoped>
 @import "../styles/form-color.css";
+@import "../styles/loader.css";
 h1 {
   display: inline-block;
   margin-bottom: 50px;
   background-color: #0059B2;
   padding: 4px 18px;
   color: snow;
+}
+.hide {
+  display: none;
 }
 /* EMAIL VALIDATION MESSAGE */
 .message-container {
@@ -154,11 +169,6 @@ input {
   background-color: #F5F5F5;
   padding: 16px;
 }
-.welcome {
-  font-family: 'Pacifico', cursive, sans-serif;
-  font-size: 2em;
-  white-space: nowrap;
-}
 .sign-up {
   max-width: 600px;
   min-height: 100%;
@@ -190,11 +200,6 @@ input {
     margin-bottom: 20px;
     padding: 12px;
     width: 85%;
-  }
-  .welcome {
-    font-family: 'Pacifico', cursive, sans-serif;
-    font-size: 1.4em;
-    margin: 0;
   }
   .sign-up {
     padding-top: 70px;
