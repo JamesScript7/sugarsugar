@@ -68,13 +68,7 @@ export default {
 </script>
 
 <style scoped>
-/* LOADING SVG */
-.loader {
-  margin-top: 80px;
-}
-.loader img {
-  width: 125px;
-}
+@import "../styles/animation.css";
 .container {
   padding-top: 70px;
   min-height: 1000px;
@@ -85,6 +79,13 @@ export default {
 }
 .go-to-form {
   display: none;
+}
+/* LOADING CAT SVG */
+.loader {
+  margin-top: 80px;
+}
+.loader img {
+  width: 125px;
 }
 /* SUGAR CARDS */
 main.list-div {
@@ -153,7 +154,6 @@ main.list-div {
 }
 .row {
   opacity: 0;
-  transform: scale(1);
   animation: fadeIn 1s forwards;
 }
 .row:hover {
@@ -205,19 +205,5 @@ main.list-div {
     border-right: 3px solid #d52d81;
     box-shadow: 1px 1px 7px #0D2945;
   }
-}
-/* KEYFRAMES ANIMATION */
-@keyframes fadeIn {
-  0% {opacity: 0;}
-  100% {opacity: 1;}
-}
-@keyframes scale {
-  0% {transform: scale(0.8);}
-  100% {transform: scale(1);}
-}
-@keyframes pop {
-  0% {transform: scale(0.2);}
-  50% {transform: scale(1.1);}
-  100% {transform: scale(1);}
 }
 </style>

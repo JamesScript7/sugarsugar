@@ -128,6 +128,7 @@ export default {
 
 <style scoped>
 @import "../styles/form-color.css";
+@import "../styles/animation.css";
 h1 {
   display: inline-block;
   background-color: #0059B2;
@@ -156,9 +157,6 @@ input, textarea, select {
   border: none;
   background-color: #F5F5F5;
 }
-.img-box {
-  height: 128px;
-}
 .new {
   max-width: 600px;
   min-height: 100%;
@@ -166,6 +164,9 @@ input, textarea, select {
   padding-top: 110px;
   opacity: 0;
   animation: fadeIn 0.8s forwards;
+}
+.img-box {
+  height: 128px;
 }
 #tax-box, #grat-box, #tax, #grat, .total-box {
   font-size: 1em;
@@ -214,19 +215,5 @@ input, textarea, select {
   .new {
     padding-top: 70px;
   }
-}
-@keyframes slideIn {
-  0% {
-    margin-left: 15%;
-    margin-right: 15%;
-    }
-  100% {
-    margin-left: 0%;
-    margin-right: 0%;
-  }
-}
-@keyframes fadeIn {
-  0% {opacity: 0;}
-  100% {opacity: 1;}
 }
 </style>

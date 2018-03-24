@@ -61,6 +61,13 @@ export default {
   background-color: #2c86e0;
   border-bottom: 1px solid #2871bb;
 }
+/* LOGOS */
+.logo-on-top, .logo-in-footer {
+  font-family: 'Pacifico', cursive, sans-serif;
+  font-size: 1.7em;
+  text-align: left;
+  align-self: center;
+}
 /* SIDE NAVIGATION AREA */
 #sideNav.hide {
   display: inline-block;
@@ -79,27 +86,17 @@ export default {
 ul li .router-link-exact-active {
   border-bottom: 2px solid snow;
 }
-/* LOGOS */
-.logo-on-top {
-  font-family: 'Pacifico', cursive, sans-serif;
-  text-align: left;
-  align-self: center;
-}
-.logo-on-top, .logo-in-footer {
-  font-family: 'Pacifico', cursive, sans-serif;
-  font-size: 1.7em;
-}
 .hamburger {
   display: none;
 }
 /* MEDIA QUERIES */
 @media screen and (max-width: 550px) {
+  .logo-on-top {
+    font-size: 1.2em;
+  }
   #navBar {
     padding: 5px 16px 1px 16px;
     z-index: 9000;
-  }
-  ul li .router-link-exact-active {
-    border-bottom: 3px solid #d52d81;
   }
   #side-nav {
     font-size: 1.2em;
@@ -118,6 +115,12 @@ ul li .router-link-exact-active {
     display: block;
     padding: 0 5px;
   }
+  ul li .router-link-exact-active {
+    font-weight: bold;
+    color: #d52d81;
+    border-bottom: 3px solid #d52d81;
+  }
+  /* HAMBURGER MENU */
   .hide {
     right: -150px;
     transition: right 0.5s ease-in-out;
@@ -126,14 +129,6 @@ ul li .router-link-exact-active {
     right: 0;
     transition: right 0.5s ease-in-out;
   }
-  li .router-link-exact-active {
-    font-weight: bold;
-    color: #d52d81;
-  }
-  .logo-on-top {
-    font-size: 1.2em;
-  }
-  /* HAMBURGER MENU */
   .new-btn {
     padding-top: 5px;
     text-align: right;

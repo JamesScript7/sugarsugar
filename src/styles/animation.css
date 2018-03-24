@@ -1,3 +1,4 @@
+/* LOGIN, NEW, SIGNUP, */
 @keyframes slideIn {
   0% {
     margin-left: 15%;
@@ -8,7 +9,18 @@
     margin-right: 0%;
   }
 }
+/* LOGIN, NEW, SIGNUP, HOME */
 @keyframes fadeIn {
   0% {opacity: 0;}
   100% {opacity: 1;}
+}
+/* HOME */
+@keyframes scale {
+  0% {transform: scale(0.8);}
+  100% {transform: scale(1);}
+}
+@keyframes pop {
+  0% {transform: scale(0.2);}
+  50% {transform: scale(1.1);}
+  100% {transform: scale(1);}
 }
