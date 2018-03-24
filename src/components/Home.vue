@@ -68,7 +68,6 @@ export default {
 </script>
 
 <style scoped>
-@import "../styles/animation.css";
 .container {
   padding-top: 70px;
   min-height: 1000px;

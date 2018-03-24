@@ -19,15 +19,16 @@ export default {
 </script>
 
 <style>
+@import "./styles/animation.css";
 *, *:before, *:after {
   box-sizing: inherit;
 }
 html, body {
   font-size: 16px;
+  height: 100%;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  height: 100%;
   background-color: #F8F8F8;
 }
 a {
@@ -35,15 +36,15 @@ a {
   color: snow;
 }
 ul {
-  list-style-type: none;
   margin: 0;
   padding: 0;
+  list-style-type: none;
 }
 nav {
-  position: fixed;
-  top: 0;
-  z-index: 1000;
   width: 100%;
+  top: 0;
+  position: fixed;
+  z-index: 1000;
 }
 #app {
   font-family: 'Cabin', Helvetica, Arial, sans-serif;
@@ -52,19 +53,5 @@ nav {
   position: relative;
   text-align: center;
   color: #2c3e50;
-}
-@keyframes slideIn {
-  0% {
-    margin-left: 15%;
-    margin-right: 15%;
-  }
-  100% {
-    margin-left: 0%;
-    margin-right: 0%;
-  }
-}
-@keyframes fadeIn {
-  0% {opacity: 0;}
-  100% {opacity: 1;}
 }
 </style>

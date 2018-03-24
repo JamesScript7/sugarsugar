@@ -108,7 +108,6 @@ export default {
 </script>
 
 <style scoped>
-@import "../styles/animation.css";
 @import "../styles/form-color.css";
 h1 {
   display: inline-block;

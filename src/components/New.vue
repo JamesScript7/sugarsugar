@@ -128,7 +128,6 @@ export default {
 
 <style scoped>
 @import "../styles/form-color.css";
-@import "../styles/animation.css";
 h1 {
   display: inline-block;
   background-color: #0059B2;

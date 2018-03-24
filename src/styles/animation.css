@@ -1,4 +1,4 @@
-/* LOGIN, NEW, SIGNUP, */
+/* LOGIN, NEW, SIGNUP, APP */
 @keyframes slideIn {
   0% {
     margin-left: 15%;
@@ -9,7 +9,7 @@
     margin-right: 0%;
   }
 }
-/* LOGIN, NEW, SIGNUP, HOME */
+/* LOGIN, NEW, SIGNUP, APP, HOME */
 @keyframes fadeIn {
   0% {opacity: 0;}
   100% {opacity: 1;}
