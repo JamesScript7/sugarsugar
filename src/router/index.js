@@ -8,6 +8,7 @@ import New from '@/components/New'
 import HistoryPage from '@/components/HistoryPage'
 import Login from '@/components/Login'
 import SignUp from '@/components/SignUp'
+import Card from '@/components/Card'
 
 Vue.use(Router)
 
@@ -43,6 +44,15 @@ let router = new Router({
       path: '/new',
       name: 'New',
       component: New,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/home/:id',
+      name: 'Card',
+      component: Card,
+      props: true,
       meta: {
         requiresAuth: true
       }

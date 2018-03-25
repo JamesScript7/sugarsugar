@@ -23,7 +23,7 @@ footer {
   padding: 40px 0 40px 50px;
   background-color: #0D2945;
   color: snow;
-  box-shadow: inset 2px 10px 25px rgba(16, 16, 16, .3);
+  /* box-shadow: inset 2px 10px 25px rgba(16, 16, 16, .3); */
 }
 .footer-ul {
   list-style-type: none;
@@ -54,7 +54,7 @@ footer {
     padding: 30px 0 40px 20px;
   }
   .footer-ul li {
-    font-size: 1em;
+    font-size: 0.9em;
   }
 }
 </style>

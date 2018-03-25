@@ -35,9 +35,9 @@
 </template>
 
 <script>
-import firebase from 'firebase'
 import NavBar from '@/components/partials/NavBar'
 import db from '@/components/firebase/firebaseInit'
+import firebase from 'firebase'
 export default {
   name: 'Home',
   components: {
@@ -63,7 +63,9 @@ export default {
             setTimeout(function () {
               self.loader = false
               for (let key in data.val().users[userNameEmail]) {
-                self.arr.push(data.val().users[userNameEmail][key])
+                if (data.val().users[userNameEmail][key].status === 'waiting') {
+                  self.arr.push(data.val().users[userNameEmail][key])
+                }
               }
               self.lists = self.arr.reverse()
             }, 1500)
@@ -72,7 +74,11 @@ export default {
       })
     },
     test (e) {
-      console.log(e.target.parentElement.id)
+      let id = e.target.parentElement.id
+      let idGeneral = e.target.id
+      if ((id && id !== '') || (idGeneral && idGeneral !== '')) {
+        this.$router.push(`/home/${id}`)
+      }
     }
   }
 }
@@ -127,6 +133,9 @@ main.list-div {
   padding: 5px 5px 5px 10px;
   margin: 0;
   text-align: left;
+}
+/* DEALING WITH POINTER EVENTS */
+.info-ul, div.date div, .img-list-holder img {
   pointer-events: none;
 }
 .info-box {

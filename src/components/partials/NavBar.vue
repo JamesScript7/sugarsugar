@@ -13,7 +13,7 @@
         <li><router-link to="/">Home</router-link></li>
         <li><router-link to="/new">New</router-link></li>
         <li><router-link to="/history">History</router-link></li>
-        <li v-on:click="logout">Logout</li>
+        <li v-on:click="logout"><router-link to="/login">Sign Out</router-link></li>
       </ul>
     </div>
   </nav>
@@ -21,18 +21,18 @@
 
 <script>
 import firebase from 'firebase'
-// BOX SHADOW EFFECT
-window.onload = function () {
-  let navBar = document.getElementById('navBar')
-  window.addEventListener('scroll', function (e) {
-    if (window.pageYOffset > 10) {
-      this.navBar.style.transition = 'box-shadow .2s ease-in-out'
-      this.navBar.style.boxShadow = '4px 2px 15px 3px rgba(13, 41, 69, .3)'
-    } else {
-      this.navBar.style.boxShadow = 'none'
-    }
-  })
-}
+// BOX SHADOW EFFECT - doesn't recognize navBar
+// window.onload = function () {
+//   let navBar = document.getElementById('navBar')
+//   window.addEventListener('scroll', function (e) {
+//     if (window.pageYOffset > 10) {
+//       this.navBar.style.transition = 'box-shadow .2s ease-in-out'
+//       this.navBar.style.boxShadow = '4px 2px 15px 3px rgba(13, 41, 69, .3)'
+//     } else {
+//       this.navBar.style.boxShadow = 'none'
+//     }
+//   })
+// }
 export default {
   name: 'NavBar',
   data () {
@@ -63,7 +63,7 @@ export default {
     logout: function () {
       let self = this
       firebase.auth().signOut().then(function () {
-        self.$router.replace('login')
+        self.$router.replace('/login')
       })
     }
   }
@@ -103,6 +103,9 @@ export default {
 }
 ul li .router-link-exact-active {
   border-bottom: 2px solid snow;
+}
+li.logout-text {
+  color: snow;
 }
 .hamburger {
   display: none;

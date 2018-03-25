@@ -1,49 +1,51 @@
 <template>
-  <div class="new">
+  <div>
     <NavBar/>
-    <form id="form-itself" @submit.prevent="saveData" autocomplete="off">
-      <div class="new-sugar">
-        <div class="img-box">
-          <img v-bind:src="this.svg" v-bind:alt="this.svg"/>
+    <div class="new">
+      <form id="form-itself" @submit.prevent="saveData" autocomplete="off">
+        <div class="new-sugar">
+          <div class="img-box">
+            <img v-bind:src="this.svg" v-bind:alt="this.svg"/>
+          </div>
+          <div>
+            <h1>New Sugar</h1>
+          </div>
         </div>
         <div>
-          <h1>New Sugar</h1>
+          <input id="name" type="text" name="name" placeholder="Name*" v-model="name" required />
         </div>
-      </div>
-      <div>
-        <input id="name" type="text" name="name" placeholder="Name*" v-model="name" required />
-      </div>
-      <div class="amount-box">
-        <input id="amount" type="number" name="amount" placeholder="Amount*" v-model="amount" required />
-      </div>
-      <div class="reason-box">
-        <textarea id="reason" type="text" name="reason" placeholder="For..." v-model="reason"></textarea>
-      </div>
-      <div class="option-box">
-        <div id="tax-box">
-          <div id="tax">Tax: ${{ taxView }}</div>
-          <select id="tax-option" v-model="tax">
-            <option value="0.00">none</option>
-            <option value=".08875">NY</option>
-          </select>
+        <div class="amount-box">
+          <input id="amount" type="number" name="amount" placeholder="Amount*" v-model="amount" required />
         </div>
-        <div id="grat-box">
-          <div id="grat">Gratuity: ${{ gratuityView }}</div>
-          <select id="grat-option" v-model="gratuity">
-            <option value="0.00">none</option>
-            <option value="0.10">10%</option>
-            <option value="0.15">15%</option>
-            <option value="0.20">20%</option>
-          </select>
+        <div class="reason-box">
+          <textarea id="reason" type="text" name="reason" placeholder="For..." v-model="reason"></textarea>
         </div>
-      </div>
-      <div class="total-box">
-        <span class="important">Total: </span><span id="total">${{ totalView }}</span>
-      </div>
-      <div class="button-container">
-        <input class="button" type="submit" value="Submit">
-      </div>
-    </form>
+        <div class="option-box">
+          <div id="tax-box">
+            <div id="tax">Tax: ${{ taxView }}</div>
+            <select id="tax-option" v-model="tax">
+              <option value="0.00">none</option>
+              <option value=".08875">NY</option>
+            </select>
+          </div>
+          <div id="grat-box">
+            <div id="grat">Gratuity: ${{ gratuityView }}</div>
+            <select id="grat-option" v-model="gratuity">
+              <option value="0.00">none</option>
+              <option value="0.10">10%</option>
+              <option value="0.15">15%</option>
+              <option value="0.20">20%</option>
+            </select>
+          </div>
+        </div>
+        <div class="total-box">
+          <span class="important">Total: </span><span id="total">${{ totalView }}</span>
+        </div>
+        <div class="button-container">
+          <input class="button" type="submit" value="Submit">
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -51,7 +53,6 @@
 import NavBar from '@/components/partials/NavBar'
 import db from '@/components/firebase/firebaseInit'
 import firebase from 'firebase'
-// import router from '@/router'
 export default {
   name: 'New',
   components: {
@@ -104,7 +105,8 @@ export default {
         gratuity: this.gratuityView,
         total: this.totalView,
         date: formatDate,
-        status: this.status
+        status: this.status,
+        completed: ''
       }
       if (this.totalView !== '' && this.totalView > 0) {
         let self = this

@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <NavBar/>
     <div class="loader" v-if="loader"><img src="/static/loading-cat.svg"/></div>
     <main id="list" class="list-div">
       <div class="item-container">
@@ -30,8 +31,13 @@
 
 <script>
 import db from '@/components/firebase/firebaseInit'
+import NavBar from '@/components/partials/NavBar'
+import firebase from 'firebase'
 export default {
   name: 'Home',
+  components: {
+    NavBar
+  },
   data () {
     return {
       lists: [],
@@ -44,15 +50,23 @@ export default {
   },
   methods: {
     fetchData () {
-      db.ref().once('value', data => {
-        let self = this
-        setTimeout(function () {
-          self.loader = false
-          for (let key in data.val()) {
-            self.arr.push(data.val()[key])
-          }
-          self.lists = self.arr.reverse()
-        }, 1500)
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          let userNameEmail = user.email.split('.')[0]
+          db.ref().once('value', data => {
+            let self = this
+            setTimeout(function () {
+              self.loader = false
+              console.log(data.val().users[userNameEmail])
+              for (let key in data.val().users[userNameEmail]) {
+                if (data.val().users[userNameEmail][key].status === 'paid') {
+                  self.arr.push(data.val().users[userNameEmail][key])
+                }
+              }
+              self.lists = self.arr.reverse()
+            }, 1500)
+          })
+        }
       })
     },
     test (e) {
@@ -151,33 +165,6 @@ ul.info-ul {
   transform: scale(1);
   animation: fadeIn 1s forwards;
 }
-.row:nth-child(1) {
-  animation-delay: 0.1s;
-}
-.row:nth-child(2) {
-  animation-delay: 0.3s;
-}
-.row:nth-child(3) {
-  animation-delay: 0.5s;
-}
-.row:nth-child(4) {
-  animation-delay: 0.7s;
-}
-.row:nth-child(5) {
-  animation-delay: 0.9s;
-}
-.row:nth-child(6) {
-  animation-delay: 1.1s;
-}
-.row:nth-child(7) {
-  animation-delay: 1.3s;
-}
-.row:nth-child(8) {
-  animation-delay: 1.5s;
-}
-.row:nth-child(9) {
-  animation-delay: 1.7s;
-}
 @media screen and (max-width: 550px) {
   .container {
     padding-top: 50px;
@@ -198,18 +185,5 @@ ul.info-ul {
   .name, .total {
     font-size: 1.1em;
   }
-}
-@keyframes fadeIn {
-  0% {opacity: 0;}
-  100% {opacity: 1;}
-}
-@keyframes scale {
-  0% {transform: scale(0.8);}
-  100% {transform: scale(1);}
-}
-@keyframes pop {
-  0% {transform: scale(0.2);}
-  50% {transform: scale(1.1);}
-  100% {transform: scale(1);}
 }
 </style>
