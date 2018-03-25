@@ -56,5 +56,8 @@ footer {
   .footer-ul li {
     font-size: 0.9em;
   }
+  .footer-ul li:first-child {
+    padding-bottom: 25px;
+  }
 }
 </style>

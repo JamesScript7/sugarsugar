@@ -4,6 +4,7 @@
     <div class="loader" v-if="loader"><img src="/static/loading-cat.svg"/></div>
     <main id="list" class="list-div">
       <div class="item-container">
+        <div class="empty-msg" v-if="isEmpty">Your history is empty...</div>
         <div>
           <router-link to="/new" id="new-btn" class="go-to-form"><button id="new-btn-btn">New</button></router-link>
         </div>
@@ -17,7 +18,7 @@
                 <li class="name">{{list.name}}</li>
                 <li class="total">Total: <span>{{list.total}}</span></li>
                 <li class="for">For: {{list.reason}}</li>
-                <li class="for">Completed:</li>
+                <li>Completed:</li>
                 <li class="status">{{list.completed}}</li>
               </ul>
             </div>
@@ -49,7 +50,8 @@ export default {
     return {
       lists: [],
       arr: [],
-      loader: true
+      loader: true,
+      isEmpty: false
     }
   },
   beforeMount () {
@@ -57,6 +59,7 @@ export default {
   },
   methods: {
     fetchData () {
+      // DUCKY SHOULD BE ON TOP
       firebase.auth().onAuthStateChanged((user) => {
         if (user) {
           let userNameEmail = user.email.split('.')[0]
@@ -64,10 +67,14 @@ export default {
             let self = this
             setTimeout(function () {
               self.loader = false
-              for (let key in data.val().users[userNameEmail]) {
-                if (data.val().users[userNameEmail][key].status === 'paid') {
-                  self.arr.push(data.val().users[userNameEmail][key])
+              if (data.val() !== null) {
+                for (let key in data.val().users[userNameEmail].history) {
+                  let keyNum = data.val().users[userNameEmail].history[key]
+                  self.arr.push(data.val().users[userNameEmail][keyNum])
                 }
+              }
+              if (self.arr.length <= 0) {
+                self.isEmpty = true
               }
               self.lists = self.arr.reverse()
             }, 1500)
@@ -180,9 +187,14 @@ main.list-div {
 .go-to-form {
   display: none;
 }
+.empty-msg {
+  padding: 20% 10%;
+  color: grey;
+}
 @media screen and (max-width: 550px) {
   .container {
     padding-top: 30px;
+    min-height: 650px;
   }
   .img-list, .img-list-holder {
     width: 60px;

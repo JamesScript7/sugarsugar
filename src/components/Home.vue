@@ -4,6 +4,7 @@
     <div class="loader" v-if="loader"><img src="/static/loading-cat.svg"/></div>
     <main id="list" class="list-div">
       <div class="item-container">
+        <div class="empty-msg" v-if="isEmpty">It's so empty in here... create a new post!</div>
         <div>
           <router-link to="/new" id="new-btn" class="go-to-form"><button id="new-btn-btn">New</button></router-link>
         </div>
@@ -47,7 +48,8 @@ export default {
     return {
       lists: [],
       arr: [],
-      loader: true
+      loader: true,
+      isEmpty: false
     }
   },
   beforeMount () {
@@ -62,10 +64,15 @@ export default {
             let self = this
             setTimeout(function () {
               self.loader = false
-              for (let key in data.val().users[userNameEmail]) {
-                if (data.val().users[userNameEmail][key].status === 'waiting') {
-                  self.arr.push(data.val().users[userNameEmail][key])
+              if (data.val() !== null) {
+                for (let key in data.val().users[userNameEmail]) {
+                  if (data.val().users[userNameEmail][key].status === 'waiting') {
+                    self.arr.push(data.val().users[userNameEmail][key])
+                  }
                 }
+              }
+              if (self.arr.length <= 0) {
+                self.isEmpty = true
               }
               self.lists = self.arr.reverse()
             }, 1500)
@@ -98,6 +105,10 @@ export default {
 }
 .go-to-form {
   display: none;
+}
+.empty-msg {
+  padding: 20% 10%;
+  color: grey;
 }
 /* SUGAR CARDS */
 main.list-div {
@@ -181,6 +192,7 @@ main.list-div {
 @media screen and (max-width: 550px) {
   .container {
     padding-top: 30px;
+    min-height: 650px;
   }
   .img-list, .img-list-holder {
     width: 60px;

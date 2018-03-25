@@ -10,10 +10,10 @@
         <div v-bind:class="line3"></div>
       </div>
       <ul v-on:click="menu" id="side-nav" v-bind:class="sideNav">
-        <li><router-link to="/">Home</router-link></li>
+        <li><router-link to="/home">Home</router-link></li>
         <li><router-link to="/new">New</router-link></li>
         <li><router-link to="/history">History</router-link></li>
-        <li v-on:click="logout"><router-link to="/login">Sign Out</router-link></li>
+        <li v-on:click="logout"><router-link to="/login">Signout</router-link></li>
       </ul>
     </div>
   </nav>

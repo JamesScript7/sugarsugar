@@ -219,7 +219,7 @@ input {
     margin: 0;
   }
   .sign-up {
-    padding-top: 70px;
+    padding-top: 20px;
   }
 }
 </style>

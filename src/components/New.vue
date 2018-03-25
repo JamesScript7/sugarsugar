@@ -15,7 +15,7 @@
           <input id="name" type="text" name="name" placeholder="Name*" v-model="name" required />
         </div>
         <div class="amount-box">
-          <input id="amount" type="number" name="amount" placeholder="Amount*" v-model="amount" required />
+          <input id="amount" type="text" name="amount" placeholder="Amount*" v-model="amount" step="0.01" required />
         </div>
         <div class="reason-box">
           <textarea id="reason" type="text" name="reason" placeholder="For..." v-model="reason"></textarea>
@@ -93,7 +93,7 @@ export default {
   methods: {
     saveData () {
       const d = new Date()
-      let formatDate = d.toDateString().split(' ').slice(1).join(' ')
+      const formatDate = d.toDateString().split(' ').slice(1).join(' ')
       this.date = d.getTime().toString()
       let data = {
         id: this.date,
@@ -106,13 +106,14 @@ export default {
         total: this.totalView,
         date: formatDate,
         status: this.status,
-        completed: ''
+        completed: '',
+        updateDate: ''
       }
       if (this.totalView !== '' && this.totalView > 0) {
-        let self = this
+        const self = this
         firebase.auth().onAuthStateChanged((user) => {
           if (user) {
-            let userNameEmail = user.email.split('.')[0]
+            const userNameEmail = user.email.split('.')[0]
             db.ref('users').child(userNameEmail).child(self.date).set(data)
             this.$router.push('/')
           }

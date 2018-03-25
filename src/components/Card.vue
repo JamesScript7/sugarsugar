@@ -2,7 +2,7 @@
   <div>
     <NavBar/>
     <div class="card-box">
-      <form>
+      <form @submit.prevent>
         <div class="img-box">
           <img v-bind:src="obj.animal" v-bind:alt="obj.animal"/>
         </div>
@@ -22,19 +22,19 @@
           </div>
         </div>
         <div class="two-list">
-          <div class="left">For: {{obj.reason}}</div>
+          <div class="left reason">For: {{obj.reason}}</div>
           <div class="right">Total: {{obj.total}}</div>
           <!-- TOGGLE SWITCH -->
-          <div class="toggler">
+          <div class="toggler" v-if="status != 'paid'">
+            <div class="mark-msg" @click="statusPaid">Mark as Paid?</div>
             <label class="switch">
               <input type="checkbox" v-model="checked">
               <span class="slider round"></span>
             </label>
-            <div @click="statusPaid">Mark as Paid</div>
           </div>
           <div class="buttoner">
-            <span><button class="delete-btn" @click="statusDelete">Delete</button></span>
-            <span><button v-bind:class="green" @click="statusPaid">Submit</button></span>
+            <span><button v-if="loader" v-bind:class="red" @click="statusDelete">Delete</button></span>
+            <span><button v-if="status != 'paid'" v-bind:class="green" @click="statusPaid">Submit</button></span>
           </div>
         </div>
       </form>
@@ -58,7 +58,10 @@ export default {
       userID: null,
       userEmail: null,
       checked: null,
-      green: null
+      green: null,
+      red: 'red',
+      status: 'paid',
+      loader: false
     }
   },
   beforeMount () {
@@ -68,8 +71,10 @@ export default {
     checked: function () {
       if (this.checked) {
         this.green = 'green'
+        this.red = null
       } else {
         this.green = null
+        this.red = 'red'
       }
     }
   },
@@ -78,36 +83,44 @@ export default {
       if (this.obj.status !== 'paid') {
         if (this.checked) {
           const d = new Date()
+          const updated = d.getTime().toString()
           const currentDate = d.toDateString().split(' ').slice(1).join(' ')
           db.ref('users').child(this.userEmail).child(this.$props.id).update({
             status: 'paid',
-            completed: currentDate
+            completed: currentDate,
+            updateDate: updated
           })
+          db.ref('users').child(this.userEmail).child('history').child(updated).set(this.obj.id)
           this.$router.push('/home')
         }
       }
     },
     statusDelete: function () {
-      let yes = confirm('Are you sure you want to delete?')
-      if (yes) {
-        if (this.obj.status === 'paid') {
+      if (!this.checked) {
+        let yes = confirm('Are you sure you want to delete?')
+        if (yes) {
           db.ref('users').child(this.userEmail).child(this.$props.id).remove()
-          this.$router.push('/history')
-        } else {
-          this.$router.push('/')
+          if (this.obj.status === 'paid') {
+            db.ref('users').child(this.userEmail).child('history').child(this.obj.updateDate).remove()
+            this.$router.push('/history')
+          } else {
+            this.$router.push('/home')
+          }
         }
       }
     },
     fetchData () {
-      let self = this
+      const self = this
       firebase.auth().onAuthStateChanged((user) => {
         self.userID = user
         if (user) {
           self.userEmail = user.email.split('.')[0]
           db.ref().once('value', data => {
             setTimeout(function () {
-              self.loader = false
+              self.loader = true
               self.obj = data.val().users[self.userEmail][self.$props.id]
+              self.status = data.val().users[self.userEmail][self.$props.id].status
+              self.id = data.val().users[self.userEmail][self.$props.id].id
             }, 1500)
           })
         }
@@ -143,6 +156,7 @@ form {
   animation: fadeIn 0.8s forwards;
 }
 button {
+  display: none;
   font-weight: bold;
   font-size: 1em;
   margin-left: 20px;
@@ -152,10 +166,12 @@ button {
   color: snow;
   box-shadow: 2px 2px #B8B8B8;
 }
-.delete-btn {
+.red {
+  display: inline-block;
   background-color: crimson;
 }
 .green {
+  display: inline-block;
   background-color: limegreen;
 }
 .one-list {
@@ -183,6 +199,12 @@ button {
 .toggler {
   padding: 14px 0;
 }
+.mark-msg {
+  padding-bottom: 6px;
+}
+.reason {
+  padding: 0 0 20px 0;
+}
 @media screen and (max-width: 550px) {
   h2 {
     margin: 0;
@@ -201,6 +223,9 @@ button {
   }
   .two-list {
     margin: 0 auto;
+  }
+  .reason {
+    padding: 10px 0;
   }
 }
 </style>

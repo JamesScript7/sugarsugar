@@ -129,7 +129,7 @@ p {
     margin: 0;
   }
   .log-in {
-    padding-top: 70px;
+    padding-top: 20px;
   }
 }
 </style>
