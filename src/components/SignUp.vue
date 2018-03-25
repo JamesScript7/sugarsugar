@@ -2,7 +2,8 @@
   <div class="sign-up">
     <div class="loader" v-if="loader"><img src="/static/loading-cat.svg"/></div>
     <form v-bind:class="this.form" @submit.prevent="signUpForm">
-      <h1>Sign up!</h1>
+      <p class="welcome">You're Almost There!</p>
+      <h1>Sign Up</h1>
       <input type="text" v-bind:class="this.message" v-model="email" placeholder="Email" required>
       <input type="password" v-bind:class="this.passwordStatus" v-model="password1" maxlength="16" placeholder="Password (at least 7 characters)" required>
       <input type="password" v-bind:class="this.passwordStatus" v-model="password2" maxlength="16" placeholder="Retype Password" required>
@@ -10,13 +11,13 @@
         <p class="message">{{this.passwordMessage}}</p>
       </div>
       <input class="button" type="submit" value="Sign up!">
+      <p>Back to <router-link class="here" to="/login">Login</router-link></p>
     </form>
   </div>
 </template>
 
 <script>
 import firebase from 'firebase'
-import router from '@/router'
 export default {
   name: 'SignUp',
   data: function () {
@@ -128,8 +129,18 @@ h1 {
   padding: 4px 18px;
   color: snow;
 }
+p {
+  color: gray;
+  white-space: nowrap;
+}
 .hide {
   display: none;
+}
+.welcome {
+  font-family: 'Pacifico', cursive, sans-serif;
+  font-size: 2em;
+  color: #2c86e0;
+  white-space: nowrap;
 }
 /* EMAIL VALIDATION MESSAGE */
 .message-container {
@@ -173,9 +184,7 @@ input {
   max-width: 600px;
   min-height: 100%;
   margin: 0 auto;
-  padding-top: 150px;
-  height: 800px;
-  height: 100vh;
+  padding: 110px 0;
   opacity: 0;
   animation: fadeIn 0.8s forwards;
 }
@@ -190,6 +199,9 @@ input {
   background-color: #f64da1;
   box-shadow: 2px 2px #B8B8B8;
 }
+.here {
+  color: #d52d81;
+}
 @media screen and (max-width: 550px) {
   form {
     padding: 30px 25px;
@@ -200,6 +212,11 @@ input {
     margin-bottom: 20px;
     padding: 12px;
     width: 85%;
+  }
+  .welcome {
+    font-family: 'Pacifico', cursive, sans-serif;
+    font-size: 1.4em;
+    margin: 0;
   }
   .sign-up {
     padding-top: 70px;

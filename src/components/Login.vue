@@ -5,6 +5,9 @@
       <h1>Login</h1>
       <input type="text" v-model="email" placeholder="Email" required>
       <input type="password" v-model="password" placeholder="Password" required>
+      <div class="message-bad">
+        <p>{{ this.message }}</p>
+      </div>
       <input class="button" type="submit" value="Login">
       <p>Don't have an account? Sign up <router-link class="here" to="/signup">here</router-link></p>
     </form>
@@ -12,26 +15,28 @@
 </template>
 
 <script>
-// import router from '@/router'
 import firebase from 'firebase'
 export default {
   name: 'Login',
   data: function () {
     return {
       email: '',
-      password: ''
+      password: '',
+      message: null
     }
   },
   methods: {
     loginForm: function () {
       // FIREBASE AUTHENTICATION
+      let self = this
       firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
         (user) => {
-          console.log('SIGNED IN: ', user)
+          console.log(user)
           this.$router.replace('home')
         },
         (err) => {
-          alert('Please try again')
+          self.message = err.code
+          this.$router.push({path: '/login'})
         }
       )
     }
@@ -71,14 +76,15 @@ input {
 .welcome {
   font-family: 'Pacifico', cursive, sans-serif;
   font-size: 2em;
+  color: #2c86e0;
   white-space: nowrap;
 }
 .log-in {
   max-width: 600px;
+  min-height: 100%;
   margin: 0 auto;
-  padding-top: 150px;
-  height: 800px;
-  height: 100vh;
+  padding: 130px 0;
+  padding-bottom: 150px;
   opacity: 0;
   animation: fadeIn 0.8s forwards;
 }
@@ -101,9 +107,14 @@ p {
 .here {
   color: #d52d81;
 }
+.message-bad, .message-bad p {
+  height: 15px;
+  margin: 0 0 20px 0;
+  color: red;
+}
 @media screen and (max-width: 550px) {
   form {
-    padding: 40px 25px;
+    padding: 40px 25px 25px 25px;
     border: 0 solid #E0E0E0;
     box-shadow: none;
   }

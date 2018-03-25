@@ -65,7 +65,6 @@ let router = new Router({
 router.beforeEach(function (to, from, next) {
   let currentUser = firebase.auth().currentUser
   // console.log(currentUser)
-
   // To see if route has meta: { requiresAuth: true }
   let requiresAuth = to.matched.some(function (rec) {
     return rec.meta.requiresAuth

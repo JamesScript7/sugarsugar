@@ -1,5 +1,6 @@
 <template>
   <div class="new">
+    <NavBar/>
     <form id="form-itself" @submit.prevent="saveData" autocomplete="off">
       <div class="new-sugar">
         <div class="img-box">
@@ -47,10 +48,15 @@
 </template>
 
 <script>
+import NavBar from '@/components/partials/NavBar'
 import db from '@/components/firebase/firebaseInit'
-import router from '@/router'
+import firebase from 'firebase'
+// import router from '@/router'
 export default {
   name: 'New',
+  components: {
+    NavBar
+  },
   data () {
     return {
       name: null,
@@ -101,8 +107,14 @@ export default {
         status: this.status
       }
       if (this.totalView !== '' && this.totalView > 0) {
-        db.ref(this.date).set(data)
-        router.push('/')
+        let self = this
+        firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+            let userNameEmail = user.email.split('.')[0]
+            db.ref('users').child(userNameEmail).child(self.date).set(data)
+            this.$router.push('/')
+          }
+        })
       } else {
         this.totalView = 'Please Enter an Amount!'
       }
@@ -212,7 +224,7 @@ input, textarea, select {
     padding: 12px;
   }
   .new {
-    padding-top: 70px;
+    padding: 70px 0;
   }
 }
 </style>

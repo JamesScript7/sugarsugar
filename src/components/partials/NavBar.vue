@@ -13,7 +13,6 @@
         <li><router-link to="/">Home</router-link></li>
         <li><router-link to="/new">New</router-link></li>
         <li><router-link to="/history">History</router-link></li>
-        <li><router-link to="/login">Login</router-link></li>
         <li v-on:click="logout">Logout</li>
       </ul>
     </div>
@@ -22,6 +21,18 @@
 
 <script>
 import firebase from 'firebase'
+// BOX SHADOW EFFECT
+window.onload = function () {
+  let navBar = document.getElementById('navBar')
+  window.addEventListener('scroll', function (e) {
+    if (window.pageYOffset > 10) {
+      this.navBar.style.transition = 'box-shadow .2s ease-in-out'
+      this.navBar.style.boxShadow = '4px 2px 15px 3px rgba(13, 41, 69, .3)'
+    } else {
+      this.navBar.style.boxShadow = 'none'
+    }
+  })
+}
 export default {
   name: 'NavBar',
   data () {

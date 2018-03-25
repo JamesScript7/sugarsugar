@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <NavBar/>
     <div class="loader" v-if="loader"><img src="/static/loading-cat.svg"/></div>
     <main id="list" class="list-div">
       <div class="item-container">
@@ -34,9 +35,14 @@
 </template>
 
 <script>
+import firebase from 'firebase'
+import NavBar from '@/components/partials/NavBar'
 import db from '@/components/firebase/firebaseInit'
 export default {
   name: 'Home',
+  components: {
+    NavBar
+  },
   data () {
     return {
       lists: [],
@@ -49,15 +55,20 @@ export default {
   },
   methods: {
     fetchData () {
-      db.ref().once('value', data => {
-        let self = this
-        setTimeout(function () {
-          self.loader = false
-          for (let key in data.val()) {
-            self.arr.push(data.val()[key])
-          }
-          self.lists = self.arr.reverse()
-        }, 1500)
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          let userNameEmail = user.email.split('.')[0]
+          db.ref().once('value', data => {
+            let self = this
+            setTimeout(function () {
+              self.loader = false
+              for (let key in data.val().users[userNameEmail]) {
+                self.arr.push(data.val().users[userNameEmail][key])
+              }
+              self.lists = self.arr.reverse()
+            }, 1500)
+          })
+        }
       })
     },
     test (e) {
