@@ -4,14 +4,21 @@
     <div class="loader" v-if="loader"><img src="/static/loading-cat.svg"/></div>
     <main id="list" class="list-div">
       <div class="item-container">
+        <div>
+          <router-link to="/new" id="new-btn" class="go-to-form"><button id="new-btn-btn">New</button></router-link>
+        </div>
         <div class="center">
           <div class="item row" v-for="(list, index) in lists" :key="index" :id="list.id" @click="test">
-            <img class="img-list" v-bind:src="list.animal" v-bind:alt="list.animal"/>
+            <div class="img-list-holder">
+              <img class="img-list" v-bind:src="list.animal" v-bind:alt="list.animal"/>
+            </div>
             <div class="info-box">
               <ul class="info-ul">
                 <li class="name">{{list.name}}</li>
                 <li class="total">Total: <span>{{list.total}}</span></li>
                 <li class="for">For: {{list.reason}}</li>
+                <li class="for">Completed:</li>
+                <li class="status">{{list.completed}}</li>
               </ul>
             </div>
             <div class="date">
@@ -30,8 +37,8 @@
 </template>
 
 <script>
-import db from '@/components/firebase/firebaseInit'
 import NavBar from '@/components/partials/NavBar'
+import db from '@/components/firebase/firebaseInit'
 import firebase from 'firebase'
 export default {
   name: 'Home',
@@ -57,7 +64,6 @@ export default {
             let self = this
             setTimeout(function () {
               self.loader = false
-              console.log(data.val().users[userNameEmail])
               for (let key in data.val().users[userNameEmail]) {
                 if (data.val().users[userNameEmail][key].status === 'paid') {
                   self.arr.push(data.val().users[userNameEmail][key])
@@ -70,31 +76,32 @@ export default {
       })
     },
     test (e) {
-      console.log(e.target.parentElement.id)
+      let id = e.target.parentElement.id
+      let idGeneral = e.target.id
+      if (id && id !== '') {
+        this.$router.push(`/home/${id}`)
+      } else if (idGeneral && idGeneral !== '') {
+        this.$router.push(`/home/${idGeneral}`)
+      }
     }
   }
 }
 </script>
 
 <style scoped>
-a {
-text-decoration: none;
-}
-img.img-list {
-  width: 125px;
-  height: 125px;
-  animation: pop 1.2s;
-}
-.loader {
-  margin-top: 80px;
-}
-.loader img {
-  width: 125px;
-}
+@import "../styles/loader.css";
 .container {
-  padding-top: 80px;
-  min-height: 900px;
+  padding-top: 70px;
+  min-height: 1000px;
 }
+.center {
+  animation: scale 0.9s;
+  animation-delay: 1.5s;
+}
+.go-to-form {
+  display: none;
+}
+/* SUGAR CARDS */
 main.list-div {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -102,47 +109,57 @@ main.list-div {
   display: flex;
   justify-content: center;
 }
+.img-list {
+  width: 125px;
+  height: 125px;
+  animation: pop 0.7s;
+}
+.item-container {
+  margin-top: 30px;
+  width: 100%;
+}
 .item {
   font-size: 20px;
   min-height: 150px;
   max-width: 700px;
-  padding: 10px;
+  padding: 4px 10px;
   margin: 0 auto;
-  margin-bottom: 16px;
+  margin-bottom: 6px;
   background-color: white;
-  box-shadow: 4px 4px lightgrey;
+  box-shadow: 1px 1px lightgrey;
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
   justify-content: space-between;
 }
-ul.info-ul {
-  list-style-type: none;
+.info-ul {
   padding: 5px 5px 5px 10px;
   margin: 0;
   text-align: left;
+}
+/* DEALING WITH POINTER EVENTS */
+.info-ul, div.date div, .img-list-holder img {
   pointer-events: none;
 }
 .info-box {
   display: inline-block;
   min-width: 50%;
+  max-width: 50%;
 }
-.item-container {
-  margin-top: 30px;
-  width: 100%;
-}
-.item.row:hover {
-  box-shadow: 2px 2px lightgrey;
-}
+/* DATA CLASSES */
 .name {
-  font-size: 1.5em;
+  font-size: 1.4em;
 }
 .total {
-  color: green;
+  color: forestgreen;
 }
 .for {
   color: gray;
+}
+.status {
+  color: forestgreen;
+  align-self: flex-end;
 }
 .date {
   display: flex;
@@ -152,38 +169,58 @@ ul.info-ul {
 .date div {
   align-self: flex-end;
 }
-.status {
-  color: goldenrod;
-  align-self: flex-end;
-}
-.center {
-  animation: scale 1.5s;
-  animation-delay: 1.5s;
-}
 .row {
   opacity: 0;
-  transform: scale(1);
   animation: fadeIn 1s forwards;
+}
+.row:hover {
+  box-shadow: 1px 1px snow;
+}
+/* NEW SUGAR BUTTON */
+.go-to-form {
+  display: none;
 }
 @media screen and (max-width: 550px) {
   .container {
-    padding-top: 50px;
+    padding-top: 30px;
   }
-  img.img-list {
-    width: 80px;
-    height: 80px;
+  .img-list, .img-list-holder {
+    width: 60px;
+    height: 60px;
   }
   .item {
     font-size: 16px;
     min-height: 80px;
-    margin-bottom: 6px;
-    box-shadow: 2px 2px #c2defd;
+    margin-bottom: 2px;
   }
   .name {
     font-weight: bold;
   }
   .name, .total {
     font-size: 1.1em;
+  }
+  /* NEW SUGAR BUTTON */
+  .go-to-form {
+    display: inline-block;
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    z-index: 1;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+    animation-delay: 1.7s;
+  }
+  button {
+    font-family: 'Pacifico', cursive, sans-serif;
+    font-size: 1.2em;
+    width: 65px;
+    height: 60px;
+    color: snow;
+    background-color: #f64da1;
+    border: none;
+    border-radius: 45%;
+    border-right: 3px solid #d52d81;
+    box-shadow: 1px 1px 7px #0D2945;
   }
 }
 </style>

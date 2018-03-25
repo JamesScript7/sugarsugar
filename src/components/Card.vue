@@ -56,6 +56,7 @@ export default {
     return {
       obj: {},
       userID: null,
+      userEmail: null,
       checked: null,
       green: null
     }
@@ -74,24 +75,39 @@ export default {
   },
   methods: {
     statusPaid: function () {
-      if (this.checked) {
-        console.log(this.$props.id)
+      if (this.obj.status !== 'paid') {
+        if (this.checked) {
+          const d = new Date()
+          const currentDate = d.toDateString().split(' ').slice(1).join(' ')
+          db.ref('users').child(this.userEmail).child(this.$props.id).update({
+            status: 'paid',
+            completed: currentDate
+          })
+          this.$router.push('/home')
+        }
       }
     },
     statusDelete: function () {
-      console.log('delete')
-      console.log(this.obj)
+      let yes = confirm('Are you sure you want to delete?')
+      if (yes) {
+        if (this.obj.status === 'paid') {
+          db.ref('users').child(this.userEmail).child(this.$props.id).remove()
+          this.$router.push('/history')
+        } else {
+          this.$router.push('/')
+        }
+      }
     },
     fetchData () {
       let self = this
       firebase.auth().onAuthStateChanged((user) => {
         self.userID = user
         if (user) {
-          let userNameEmail = user.email.split('.')[0]
+          self.userEmail = user.email.split('.')[0]
           db.ref().once('value', data => {
             setTimeout(function () {
               self.loader = false
-              self.obj = data.val().users[userNameEmail][self.$props.id]
+              self.obj = data.val().users[self.userEmail][self.$props.id]
             }, 1500)
           })
         }
@@ -130,7 +146,7 @@ button {
   font-weight: bold;
   font-size: 1em;
   margin-left: 20px;
-  padding: 10px;
+  padding: 12px;
   border: none;
   border-radius: 3px;
   color: snow;

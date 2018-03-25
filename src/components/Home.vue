@@ -76,8 +76,10 @@ export default {
     test (e) {
       let id = e.target.parentElement.id
       let idGeneral = e.target.id
-      if ((id && id !== '') || (idGeneral && idGeneral !== '')) {
+      if (id && id !== '') {
         this.$router.push(`/home/${id}`)
+      } else if (idGeneral && idGeneral !== '') {
+        this.$router.push(`/home/${idGeneral}`)
       }
     }
   }
