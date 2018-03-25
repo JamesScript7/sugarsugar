@@ -6,33 +6,37 @@
         <div class="img-box">
           <img v-bind:src="obj.animal" v-bind:alt="obj.animal"/>
         </div>
+        <h2>{{obj.name}}</h2>
         <div class="one-list">
           <div class="left">
             <div>Date:</div>
-            <div>Name:</div>
-            <div>Status:</div>
+            <div>Amount:</div>
             <div>Tax:</div>
             <div>Gratuity:</div>
-            <div>Total:</div>
-            <div>For:</div>
           </div>
           <div class="right">
             <div>{{obj.date}}</div>
-            <div>{{obj.name}}</div>
-            <div>{{obj.status}}</div>
+            <div>{{obj.amount}}</div>
             <div>{{obj.tax}}</div>
             <div>{{obj.gratuity}}</div>
-            <div>{{obj.total}}</div>
-            <div>{{obj.reason}}</div>
           </div>
         </div>
-        <div @click="statusPaid">Mark as Paid</div>
-        <!-- TOGGLE SWITCH -->
-        <label class="switch">
-          <input type="checkbox">
-          <span class="slider round"></span>
-        </label>
-        <div><button class="delete-btn" @click="statusDelete">Delete</button></div>
+        <div class="two-list">
+          <div class="left">For: {{obj.reason}}</div>
+          <div class="right">Total: {{obj.total}}</div>
+          <!-- TOGGLE SWITCH -->
+          <div class="toggler">
+            <label class="switch">
+              <input type="checkbox" v-model="checked">
+              <span class="slider round"></span>
+            </label>
+            <div @click="statusPaid">Mark as Paid</div>
+          </div>
+          <div class="buttoner">
+            <span><button class="delete-btn" @click="statusDelete">Delete</button></span>
+            <span><button v-bind:class="green" @click="statusPaid">Submit</button></span>
+          </div>
+        </div>
       </form>
     </div>
   </div>
@@ -51,15 +55,28 @@ export default {
   data: function () {
     return {
       obj: {},
-      userID: null
+      userID: null,
+      checked: null,
+      green: null
     }
   },
   beforeMount () {
     this.fetchData()
   },
+  watch: {
+    checked: function () {
+      if (this.checked) {
+        this.green = 'green'
+      } else {
+        this.green = null
+      }
+    }
+  },
   methods: {
     statusPaid: function () {
-      console.log(this.$props.id)
+      if (this.checked) {
+        console.log(this.$props.id)
+      }
     },
     statusDelete: function () {
       console.log('delete')
@@ -96,6 +113,10 @@ form {
   box-shadow: 4px 4px #c2defd;
   animation: slideIn 1.2s;
 }
+.img-box {
+  height: 128px;
+  margin-bottom: 20px;
+}
 .card-box {
   max-width: 600px;
   min-height: 100%;
@@ -108,41 +129,62 @@ form {
 button {
   font-weight: bold;
   font-size: 1em;
+  margin-left: 20px;
   padding: 10px;
   border: none;
-  border-right: 4px solid #d52d81;
   border-radius: 3px;
   color: snow;
-  background-color: crimson;
   box-shadow: 2px 2px #B8B8B8;
+}
+.delete-btn {
+  background-color: crimson;
+}
+.green {
+  background-color: limegreen;
 }
 .one-list {
   width: 250px;
   margin: 0 auto;
+  padding: 8px 10px;
   text-align: left;
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+.two-list {
+  width: 250px;
+  margin: 15px auto;
+  padding: 8px 10px;
+}
 .left {
   text-align: left;
 }
-.right {
+.right, .toggler, .buttoner {
   text-align: right;
 }
-.img-box {
-  height: 128px;
+.buttoner {
+  padding: 10px 0;
+}
+.toggler {
+  padding: 14px 0;
 }
 @media screen and (max-width: 550px) {
+  h2 {
+    margin: 0;
+    margin-bottom: 10px;
+  }
   form {
-    padding: 40px 25px 25px 25px;
+    padding: 40px 15px 25px 15px;
     border: 0 solid #E0E0E0;
     box-shadow: none;
   }
   .card-box {
     padding-top: 70px;
   }
-  .one-list {
-    padding: 30px 10px;
+  .one-list, .two-list {
+    padding: 0 10px;
+  }
+  .two-list {
+    margin: 0 auto;
   }
 }
 </style>
