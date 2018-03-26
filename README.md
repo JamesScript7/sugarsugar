@@ -11,12 +11,13 @@ I designed it with a mobile first approach complete with login authentication!
 
 [Link to the project!](http://sugar-beta.surge.sh/)
 
-You can use this test email and password:
+_You can use this test email and password:_
 
 email: test@test.com
+
 password: qwerty123
 
-Some screen shots:
+## Some screen shots:
 
 ### Login & Signup
 
