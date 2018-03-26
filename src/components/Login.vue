@@ -31,7 +31,6 @@ export default {
       let self = this
       firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
         (user) => {
-          console.log(user)
           this.$router.replace('home')
         },
         (err) => {

@@ -1,6 +1,29 @@
-# sugar
+# SugarSugar
 
 > A Vue.js project
+
+About the project:
+It's a simple tool to keep track of your interpersonal expenses.
+
+I designed it with a mobile first approach complete with login authentication!
+
+**Skills:** HTML, CSS, CSS Grid, Flexbox, JS, Vue.js, and Firebase realtime database.
+
+[Link to the project!](http://sugar-beta.surge.sh/)
+
+You can use this test email and password:
+email: test@test.com
+password: qwerty123
+
+Some screen shots:
+_Login & Signup_
+![alt text](https://raw.githubusercontent.com/JamesScript7/sugarsugar/master/images/login-signup.png)
+
+_New Form & Home_
+![alt text](https://raw.githubusercontent.com/JamesScript7/sugarsugar/master/images/new-home.png)
+
+_Mark as Paid and Delete_
+![alt text](https://raw.githubusercontent.com/JamesScript7/sugarsugar/master/images/edit-delete.png)
 
 ## Build Setup
 
